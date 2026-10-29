@@ -1,0 +1,4 @@
+PASS: native filtering/resampling/z-score byte-identical on synthetic 12-lead signal
+PASS: model initialization and aggregation exactly equal for all 40 canonical configurations
+PASS: local training states, sampled records and loss exactly equal for four methods
+PASS: all 21,463 record assignments, labels and data ID match recovered source and saved manifest

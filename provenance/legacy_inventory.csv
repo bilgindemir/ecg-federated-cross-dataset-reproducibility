@@ -1,0 +1,363 @@
+path,bytes,sha256,architecture,embedded_provenance,inspection_error
+/content/drive/MyDrive/ecg_fl_journal/checkpoints/best_fedadam_primary_200hz_stride512_bezier.pt,443791,dec3e063f225871397609f3fb031455fb621c8cae771bc05f1bde3a68ac0144d,uploaded_gn_compatible,False,
+/content/drive/MyDrive/ecg_fl_journal/checkpoints/best_fedavg_primary_200hz_stride512_bezier.pt,443765,1f74934f05fd4737f7a9d8055f1fda30855939d623a0da452db78b0c5ce2401e,uploaded_gn_compatible,False,
+/content/drive/MyDrive/ecg_fl_journal/checkpoints/best_fedavgm_primary_200hz_stride512_bezier.pt,443791,d1f8b4714cf53ed54556efcda4a506ed2ebb2f853b19a293a7c3c0467deb523e,uploaded_gn_compatible,False,
+/content/drive/MyDrive/ecg_fl_journal/checkpoints/best_fedprox_primary_200hz_stride512_bezier.pt,443791,e24772eb5cb4f260807c4851eb187fd7aaa1253235042cc38c507990751f81eb,uploaded_gn_compatible,False,
+/content/drive/MyDrive/ecg_fl_journal/results/comment10_membership_inference/mia_repeated_splits.csv,12413,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment10_membership_inference/mia_summary.csv,1769,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/comment11_incart_record_cluster_ci.csv,2604,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/comment11_pooled_window_metrics.csv,2564,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/comment11_ptb_patient_cluster_ci.csv,2945,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/comment11_ptb_record_level_metrics.csv,736,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/comment11_restricted_vs_expanded.csv,3151,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/experiment_metadata.json,449,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/incart_record_manifest.csv,2061,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/incart_records/I05.npz,252439,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/incart_records/I06.npz,256444,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/incart_records/I19.npz,250179,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/incart_records/I23.npz,255399,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/incart_records/I34.npz,251742,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/incart_records/I36.npz,249439,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/incart_records/I43.npz,237373,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/incart_records/I45.npz,212559,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/incart_records/I46.npz,214631,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/incart_records/I48.npz,242815,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/incart_records/I50.npz,253804,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/incart_records/I59.npz,253663,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/incart_records/I62.npz,254916,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/incart_records/I65.npz,257070,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/incart_records/I70.npz,256382,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/ptb_batch_manifest.csv,2845,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/ptb_batches/ptb_0000_0099.npz,1320874,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/ptb_batches/ptb_0100_0199.npz,1328881,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/ptb_batches/ptb_0200_0299.npz,1337765,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/ptb_batches/ptb_0300_0399.npz,1340870,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/ptb_batches/ptb_0400_0499.npz,1314468,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/ptb_batches/ptb_0500_0599.npz,1309572,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/ptb_batches/ptb_0600_0699.npz,1326626,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/ptb_batches/ptb_0700_0799.npz,1319748,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/ptb_batches/ptb_0800_0899.npz,1280485,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/ptb_batches/ptb_0900_0999.npz,1278806,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/ptb_batches/ptb_1000_1099.npz,1321349,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/ptb_batches/ptb_1100_1199.npz,1311040,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/ptb_batches/ptb_1200_1299.npz,1272441,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/ptb_batches/ptb_1300_1399.npz,1312263,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/ptb_batches/ptb_1400_1499.npz,1284006,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/ptb_batches/ptb_1500_1599.npz,1318647,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/ptb_batches/ptb_1600_1699.npz,1273947,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/ptb_batches/ptb_1700_1799.npz,1271516,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/ptb_batches/ptb_1800_1899.npz,1339561,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/ptb_batches/ptb_1900_1999.npz,1293634,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/ptb_batches/ptb_2000_2099.npz,1290689,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment11_expanded_d1/ptb_batches/ptb_2100_2197.npz,1199549,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment13_tau_sensitivity/tau_absolute_metrics.csv,1524,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment13_tau_sensitivity/tau_change_vs_005.csv,1477,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment13_tau_sensitivity/tau_label_sensitivity.csv,273,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment13_tau_sensitivity/tau_method_rankings.csv,585,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment13_tau_sensitivity/tau_metric_ranges.csv,1610,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/checkpoints/fedadam_data_weighted_seed101.pt,163164,1c3d9b61a2a962047a4533ba6cd083b795fec89d610fff1d8a5093d212d3b6df,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/checkpoints/fedadam_data_weighted_seed202.pt,163164,e00ba2f47e392e58116f80a3f16d6fc5e117979edd7eee75c8dafd84605d5326,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/checkpoints/fedadam_data_weighted_seed303.pt,163164,ae22160780341a5db4c53ec878c33731fb1bf8fd39e56025edaa8cb8cb165349,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/checkpoints/fedadam_equal_seed101.pt,162868,6f55b6e8c4ef2a4ff04a9d6dd0cc7d30fb92456b0f923e3d307d9909b42e33e3,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/checkpoints/fedadam_equal_seed202.pt,162868,ce9e66eefbc2a320644cb3950734b59d84eb72035266b7d176f35a7dc9bcd018,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/checkpoints/fedadam_equal_seed303.pt,162868,80bf79b16b2b49d8a0c17a4e0ec902faf653e8bc26a990422c0de3c2567d3ee3,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/checkpoints/fedavg_data_weighted_seed101.pt,163135,88ffec0c6ad7d20ae0fee96bee6e1be47514591f43508fd69074bf4685463090,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/checkpoints/fedavg_data_weighted_seed202.pt,163135,a81885253c5b21761ecfa2a2f705dba37f8805ab84997158887a617c34f4f722,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/checkpoints/fedavg_data_weighted_seed303.pt,163135,3ce198e69ab302d70781cbf35db06260411c9602cffbeff954bac07cac5b475c,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/checkpoints/fedavg_equal_seed101.pt,162839,d0730b3d31be84f6fa651a80276be1c0f22647f47fe2e8f15499574920f7168d,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/checkpoints/fedavg_equal_seed202.pt,162839,e850ba3e718950f7ca8ac0f79644d72019666631f8af82494cef14c9291d5232,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/checkpoints/fedavg_equal_seed303.pt,162839,574358bc1bad5b2e7a6166c55b0baaa1fe4c011371ee59baf82e7bbb8145f380,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/checkpoints/fedavgm_data_weighted_seed101.pt,163164,31a8acd820c0509b48ec57aa2ebb6451c640e401b158d49a359fc75078795fc5,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/checkpoints/fedavgm_data_weighted_seed202.pt,163164,3474ea0d2e6484490205d4d50c31c9a9ac9d95dcac1937f09570ff416595e131,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/checkpoints/fedavgm_data_weighted_seed303.pt,163164,c6277f7679998354984a0fd025e418b8f96a3bae8ee907761d7186a42860710c,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/checkpoints/fedavgm_equal_seed101.pt,162868,6e3c7c6fc7d5617df66c2e4338cd4fd47d9923b039ec0ccd49e73470b010e62d,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/checkpoints/fedavgm_equal_seed202.pt,162868,0be9be6d4bb504f1e81f78572b12d0bcc2822044b1b0afa11351c2b7ca79b81c,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/checkpoints/fedavgm_equal_seed303.pt,162868,2616afb79dd9f797dfa2052540048369eccb5c82454d85a384db288ef58555a6,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/checkpoints/fedprox_data_weighted_seed101.pt,163164,065df6f459189af23c2b8fc72903378d8cfd72f33a68493f8b4aa51fb7404221,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/checkpoints/fedprox_data_weighted_seed202.pt,163164,d2fa172c5a3176e493050a7f2327084b3a670ff48fb4400c94bc28f2320a7412,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/checkpoints/fedprox_data_weighted_seed303.pt,163164,7ba5c641765cbd18ecb71759763dad52209050e5e45c51732a74e89b0dc93826,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/checkpoints/fedprox_equal_seed101.pt,162868,2022579cc38706f8401b60ddf59f531dfed8322876da22a150bc796c31f3dd10,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/checkpoints/fedprox_equal_seed202.pt,162868,7016e05229d738fb517b3c6b7b77e543df32c4b9f2b4dfed0b32b4e4d48f1d3d,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/checkpoints/fedprox_equal_seed303.pt,162868,cc1308108dfc4bd6b011451f935b05cd420612b2ea964cf1f6680e7a5170d1fd,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/comment14_all_runs.csv,5283,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/comment14_client_aggregation_weights.csv,218,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/comment14_compact_table.csv,1919,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/comment14_deltas_data_minus_equal.csv,615,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/comment14_summary.csv,3480,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/histories/fedadam_data_weighted_seed101.csv,2499,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/histories/fedadam_data_weighted_seed202.csv,2497,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/histories/fedadam_data_weighted_seed303.csv,2500,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/histories/fedadam_equal_seed101.csv,2334,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/histories/fedadam_equal_seed202.csv,2342,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/histories/fedadam_equal_seed303.csv,2346,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/histories/fedavg_data_weighted_seed101.csv,2510,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/histories/fedavg_data_weighted_seed202.csv,2506,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/histories/fedavg_data_weighted_seed303.csv,2505,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/histories/fedavg_equal_seed101.csv,2355,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/histories/fedavg_equal_seed202.csv,2346,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/histories/fedavg_equal_seed303.csv,2345,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/histories/fedavgm_data_weighted_seed101.csv,2513,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/histories/fedavgm_data_weighted_seed202.csv,2520,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/histories/fedavgm_data_weighted_seed303.csv,2534,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/histories/fedavgm_equal_seed101.csv,2367,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/histories/fedavgm_equal_seed202.csv,2370,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/histories/fedavgm_equal_seed303.csv,2374,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/histories/fedprox_data_weighted_seed101.csv,2522,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/histories/fedprox_data_weighted_seed202.csv,2521,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/histories/fedprox_data_weighted_seed303.csv,2521,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/histories/fedprox_equal_seed101.csv,2369,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/histories/fedprox_equal_seed202.csv,2354,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/histories/fedprox_equal_seed303.csv,2361,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/run_summaries/fedadam_data_weighted_seed101.csv,399,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/run_summaries/fedadam_data_weighted_seed202.csv,398,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/run_summaries/fedadam_data_weighted_seed303.csv,400,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/run_summaries/fedadam_equal_seed101.csv,392,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/run_summaries/fedadam_equal_seed202.csv,391,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/run_summaries/fedadam_equal_seed303.csv,389,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/run_summaries/fedavg_data_weighted_seed101.csv,398,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/run_summaries/fedavg_data_weighted_seed202.csv,400,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/run_summaries/fedavg_data_weighted_seed303.csv,396,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/run_summaries/fedavg_equal_seed101.csv,389,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/run_summaries/fedavg_equal_seed202.csv,390,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/run_summaries/fedavg_equal_seed303.csv,388,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/run_summaries/fedavgm_data_weighted_seed101.csv,399,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/run_summaries/fedavgm_data_weighted_seed202.csv,398,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/run_summaries/fedavgm_data_weighted_seed303.csv,398,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/run_summaries/fedavgm_equal_seed101.csv,390,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/run_summaries/fedavgm_equal_seed202.csv,389,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/run_summaries/fedavgm_equal_seed303.csv,390,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/run_summaries/fedprox_data_weighted_seed101.csv,399,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/run_summaries/fedprox_data_weighted_seed202.csv,399,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/run_summaries/fedprox_data_weighted_seed303.csv,400,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/run_summaries/fedprox_equal_seed101.csv,390,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/run_summaries/fedprox_equal_seed202.csv,391,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment14_aggregation_weighting/run_summaries/fedprox_equal_seed303.csv,391,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment15_transfer_learning/checkpoints/incart_only_seed101.pt,162810,7e701d847d5f9b9eea8e0cbf183bc6945b59a99badbd754fcf3c9cec34e04047,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment15_transfer_learning/checkpoints/incart_only_seed202.pt,162810,0fb82eeacdfed17f173736e46b761795ada32d431f46795c6df47fdd02bb771a,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment15_transfer_learning/checkpoints/incart_only_seed303.pt,162810,f375478e72c7f68ae8aeaf3d693d52fc1aabaf503a15f0527c08f0f2bf2c2d07,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment15_transfer_learning/checkpoints/ptb_only_seed101.pt,162723,b5c12f9209b5228b58ba7327f1381d9246ac3d1203db6a13b96066c5400cc62e,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment15_transfer_learning/checkpoints/ptb_only_seed202.pt,162723,b166798c270f3feeffbb189b9a9b83ffa971af47585bd9b002cb295e68b8893d,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment15_transfer_learning/checkpoints/ptb_only_seed303.pt,162723,a41a8375047a3ed229cad862ea2edab8208566a29b380b10e64816f3bdd99311,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment15_transfer_learning/checkpoints/ptb_to_incart_transfer_seed101.pt,163193,d53235dd22ada85cb5bbaf6706c3be58b88ec490dce41cae81c639551bda2e1f,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment15_transfer_learning/checkpoints/ptb_to_incart_transfer_seed202.pt,163193,895b16b2f4006ac1fb6e9ddd51800e8f38216dc3df47446124609bb1b7fbb8d5,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment15_transfer_learning/checkpoints/ptb_to_incart_transfer_seed303.pt,163193,d2ac4ece635031c9fb34d3f9cef76a996c909610322606c63ec0767c92a36b0a,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment15_transfer_learning/comment15_all_runs.csv,1849,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment15_transfer_learning/comment15_compact_table.csv,798,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment15_transfer_learning/comment15_summary.csv,1419,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment15_transfer_learning/comment15_transfer_delta.csv,221,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment15_transfer_learning/run_summaries/transfer_seed101.csv,709,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment15_transfer_learning/run_summaries/transfer_seed202.csv,714,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment15_transfer_learning/run_summaries/transfer_seed303.csv,711,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/checkpoints/fedadam_lr_1e-1_seed101.pt,162990,63d840627cb8580394db7588bbd9aabb22f76776d5e16503887673b972c53a65,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/checkpoints/fedadam_lr_1e-1_seed202.pt,162990,bf05dcba0b7dbdfdc4e077ad2dcdc40052e1e6908a7c58c02c80fc097cfb4eb5,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/checkpoints/fedadam_lr_1e-1_seed303.pt,162990,08c580ceb46219663f8454f31f904bf7aeaa3e69f92e9dbd6c994121cfca377c,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/checkpoints/fedadam_lr_1e-2_seed101.pt,162990,0727b4d7a9090ce821946c7d1552abe31c9bf4380d7566ea897afb9d89ffc4d2,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/checkpoints/fedadam_lr_1e-2_seed202.pt,162990,9fe55b102514576a45fbec71355c670bbc1fe97a5628f3de569f0f732e7053b8,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/checkpoints/fedadam_lr_1e-2_seed303.pt,162990,de461983d3cb67813ff42523db72a3bbcf7382e1563754d8db79710fc0a90893,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/checkpoints/fedadam_lr_1e-3_seed101.pt,162990,33988515bec1be35e556926af0734e96c7660956687a827293cd2bf699e70129,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/checkpoints/fedadam_lr_1e-3_seed202.pt,162990,3031b99a5a6c6ca26b36c7ed7a000f1f8c6268fc23f5c1cf1f88b72952c45c4e,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/checkpoints/fedadam_lr_1e-3_seed303.pt,162990,b584a792ca0fe9b1a1c5dfa8e184a6230141120922e1107bf7098bde21dfa393,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/checkpoints/fedprox_mu_1e-2_seed101.pt,162990,4e69c6527d95e1a3f42669cfdec19afa7dc4c3d5f2a9b3f8bc722cc7c9aa33b0,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/checkpoints/fedprox_mu_1e-2_seed202.pt,162990,676c6808363aefbe9cefeee3a1b9e5f7720c740f2aa541aaac51fe194bd30286,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/checkpoints/fedprox_mu_1e-2_seed303.pt,162990,ae98b1591ae37ce173f6951aa424d396eda21770feb028a7a49cb6e155a64d23,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/checkpoints/fedprox_mu_1e-3_seed101.pt,162990,1be2ffce19cc0fa0c9501f2191cb6e8352d8ca784f474cf5191b6d18b9ac1d13,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/checkpoints/fedprox_mu_1e-3_seed202.pt,162990,b9ffc0dfe48cfb2b800aab0c27b6c110223423eb924fe1b669ba86f24e655f94,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/checkpoints/fedprox_mu_1e-3_seed303.pt,162990,9622b374af3bfb86294a01a11733c1423fa26c40d05c47ae90016324a53b41ac,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/checkpoints/fedprox_mu_1e-4_seed101.pt,162990,2dec85febebc04db6662ebf4e496071eddf60194a06e65493e77d940dc363e94,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/checkpoints/fedprox_mu_1e-4_seed202.pt,162990,b5343ae1c6728f440645600087536246c836f6ebaa3ec0f353b2a5ddd1a76332,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/checkpoints/fedprox_mu_1e-4_seed303.pt,162990,b28f713042a6223de5451d164c8d153e4645445e4d528c46a401afb93ce4d88c,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/comment4_all_runs.csv,6895,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/comment4_summary_by_config.csv,3274,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/comment4_validation_selected_configs.csv,1418,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/histories/fedadam_lr_1e-1_seed101.csv,3245,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/histories/fedadam_lr_1e-1_seed202.csv,3260,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/histories/fedadam_lr_1e-1_seed303.csv,3247,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/histories/fedadam_lr_1e-2_seed101.csv,3302,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/histories/fedadam_lr_1e-2_seed202.csv,3312,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/histories/fedadam_lr_1e-2_seed303.csv,3308,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/histories/fedadam_lr_1e-3_seed101.csv,2918,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/histories/fedadam_lr_1e-3_seed202.csv,2957,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/histories/fedadam_lr_1e-3_seed303.csv,3026,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/histories/fedprox_mu_1e-2_seed101.csv,3186,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/histories/fedprox_mu_1e-2_seed202.csv,3181,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/histories/fedprox_mu_1e-2_seed303.csv,3183,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/histories/fedprox_mu_1e-3_seed101.csv,3206,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/histories/fedprox_mu_1e-3_seed202.csv,3198,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/histories/fedprox_mu_1e-3_seed303.csv,3203,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/histories/fedprox_mu_1e-4_seed101.csv,3222,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/histories/fedprox_mu_1e-4_seed202.csv,3215,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/histories/fedprox_mu_1e-4_seed303.csv,3228,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/run_summaries/fedadam_lr_1e-1_seed101.csv,675,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/run_summaries/fedadam_lr_1e-1_seed202.csv,676,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/run_summaries/fedadam_lr_1e-1_seed303.csv,672,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/run_summaries/fedadam_lr_1e-2_seed101.csv,677,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/run_summaries/fedadam_lr_1e-2_seed202.csv,675,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/run_summaries/fedadam_lr_1e-2_seed303.csv,674,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/run_summaries/fedadam_lr_1e-3_seed101.csv,683,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/run_summaries/fedadam_lr_1e-3_seed202.csv,685,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/run_summaries/fedadam_lr_1e-3_seed303.csv,686,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/run_summaries/fedprox_mu_1e-2_seed101.csv,670,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/run_summaries/fedprox_mu_1e-2_seed202.csv,667,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/run_summaries/fedprox_mu_1e-2_seed303.csv,671,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/run_summaries/fedprox_mu_1e-3_seed101.csv,667,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/run_summaries/fedprox_mu_1e-3_seed202.csv,669,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/run_summaries/fedprox_mu_1e-3_seed303.csv,670,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/run_summaries/fedprox_mu_1e-4_seed101.csv,670,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/run_summaries/fedprox_mu_1e-4_seed202.csv,668,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment4_hyperparameter_sensitivity/full_sweep/run_summaries/fedprox_mu_1e-4_seed303.csv,669,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/checkpoints/fedadam_E3_seed101.pt,162781,b2e8c09a5b1b2c6a138594162002d4039016ccd6d204f651586cb8129ff5894a,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/checkpoints/fedadam_E3_seed202.pt,162781,f9700e50abaef8327e8db3a466d25b182e3d0a7575b665b576285cf5436362ce,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/checkpoints/fedadam_E3_seed303.pt,162781,b02ac06e820fa34650a5395347b78f64a464f26a4f86751aa998b026e1d0095e,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/checkpoints/fedadam_E5_seed101.pt,162781,c72b17da624f578100e777bbc712c402fc1aa7930322bf3ebe0f3ca12daba8ae,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/checkpoints/fedadam_E5_seed202.pt,162781,208c878587afce6d43d6dd08015f887ff2ee68728daa3380ed450e3422bfdbaf,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/checkpoints/fedadam_E5_seed303.pt,162781,51b647bb0454d7055414357d73f16386df4f374052ad76c5a59b05ad5cf8e242,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/checkpoints/fedavg_E1_seed101.pt,162752,a25ccbb5bf3512368fef1d5a2df2017236687aa6360150876446bc50e3b9f8a0,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/checkpoints/fedavg_E1_seed202.pt,162752,bac139ab9cffd9f20fa6befcb37a6cc31b2995bca15dd383547efe1d9386bc5b,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/checkpoints/fedavg_E1_seed303.pt,162752,a6eef913d47c8dc363dfdd5758a31e11df7d17941349e4518e150c6cf4c22b31,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/checkpoints/fedavg_E3_seed101.pt,162752,aebe5432b405a089d3721231bb6e0cabc6624c2217c49ac383183211811889de,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/checkpoints/fedavg_E3_seed202.pt,162752,fa581e43867560c2c7696936fc62af91c86fef6feb5236669982bfc3b047b486,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/checkpoints/fedavg_E3_seed303.pt,162752,5aae2847360e14fdf7ce444949e96e24687339aa5195b80a3fa9da7287f229ab,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/checkpoints/fedavg_E5_seed101.pt,162752,1dcf1ecf8c20631016b39b56f9b5a7f6a2ad7bc2841214f0fca077c62b297da9,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/checkpoints/fedavg_E5_seed202.pt,162752,512629e2d8e2d6f83b3316ed75e7b22d742d3d30b2012197970cd4bd2a09e167,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/checkpoints/fedavg_E5_seed303.pt,162752,8498a09b438dadb27a321d759207249475aced6482337f0092459ebed021da62,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/checkpoints/fedprox_E3_seed101.pt,162781,405a85e38a32b22cd9a5ea29cb4baf66e3cf015e033ea1798c076afbf4e3c843,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/checkpoints/fedprox_E3_seed202.pt,162781,635e91e0cd5ed897d5bd77bf0ed94607bed766b046601f2ea579976bd9d67517,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/checkpoints/fedprox_E3_seed303.pt,162781,7d759fc22bbb171fdf916db03b5ac2f92445d9ecaf6f8441d4e386511ded11e8,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/checkpoints/fedprox_E5_seed101.pt,162781,4e7008f14cb07b3221c307993582275aaa21339a860f4a09e58459c7b2d5907c,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/checkpoints/fedprox_E5_seed202.pt,162781,1cf8b6824939b5ccebef6b0c81c891242ddef0d6fafc8a65c80cf53296cae2df,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/checkpoints/fedprox_E5_seed303.pt,162781,ca000e9a6ca54bf340f212e3e7d2a8e65528e931e47d8883522c065cc93c6053,,,"RuntimeError: Error(s) in loading state_dict for CNN:
+	Missing key(s) in state_dict: ""net.0.weight"", ""net.0.bias"", ""net.1.weight"", ""net.1.bias"", ""net.3.weight"", ""net.3.bias"", ""net.4.weight"", ""net.4.bias"", ""net.7.we"
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/comment7_all_runs.csv,5988,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/comment7_deltas_vs_E1.csv,1031,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/comment7_summary_by_local_epochs.csv,3782,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/histories/fedadam_E3_seed101.csv,2249,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/histories/fedadam_E3_seed202.csv,2288,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/histories/fedadam_E3_seed303.csv,2259,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/histories/fedadam_E5_seed101.csv,2250,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/histories/fedadam_E5_seed202.csv,2247,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/histories/fedadam_E5_seed303.csv,2250,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/histories/fedavg_E1_seed101.csv,2276,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/histories/fedavg_E1_seed202.csv,2272,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/histories/fedavg_E1_seed303.csv,2265,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/histories/fedavg_E3_seed101.csv,2279,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/histories/fedavg_E3_seed202.csv,2289,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/histories/fedavg_E3_seed303.csv,2282,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/histories/fedavg_E5_seed101.csv,2293,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/histories/fedavg_E5_seed202.csv,2286,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/histories/fedavg_E5_seed303.csv,2286,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/histories/fedprox_E3_seed101.csv,2307,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/histories/fedprox_E3_seed202.csv,2307,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/histories/fedprox_E3_seed303.csv,2311,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/histories/fedprox_E5_seed101.csv,2301,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/histories/fedprox_E5_seed202.csv,2302,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/histories/fedprox_E5_seed303.csv,2290,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedadam_E1_seed101.csv,414,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedadam_E1_seed202.csv,413,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedadam_E1_seed303.csv,411,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedadam_E3_seed101.csv,406,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedadam_E3_seed202.csv,406,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedadam_E3_seed303.csv,403,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedadam_E5_seed101.csv,405,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedadam_E5_seed202.csv,405,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedadam_E5_seed303.csv,405,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedavg_E1_seed101.csv,403,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedavg_E1_seed202.csv,406,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedavg_E1_seed303.csv,402,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedavg_E3_seed101.csv,403,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedavg_E3_seed202.csv,403,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedavg_E3_seed303.csv,403,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedavg_E5_seed101.csv,403,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedavg_E5_seed202.csv,405,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedavg_E5_seed303.csv,404,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedprox_E1_seed101.csv,410,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedprox_E1_seed202.csv,413,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedprox_E1_seed303.csv,413,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedprox_E3_seed101.csv,404,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedprox_E3_seed202.csv,406,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedprox_E3_seed303.csv,404,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedprox_E5_seed101.csv,405,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedprox_E5_seed202.csv,406,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/comment7_local_epoch_sensitivity/run_summaries/fedprox_E5_seed303.csv,404,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/hist_fedadam_primary_200hz_stride512_bezier.csv,2394,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/hist_fedavg_primary_200hz_stride512_bezier.csv,2379,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/hist_fedavgm_primary_200hz_stride512_bezier.csv,2386,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/hist_fedprox_primary_200hz_stride512_bezier.csv,2373,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/marjan_test_only_stride1_200hz_bezier_results.csv,1499,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/primary_results_primary_200hz_stride512_bezier.csv,1506,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/stride512_vs_stride1_full_metrics_sen_ppv_f1.csv,1841,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/stride512_vs_stride1_roc_auc_comparison.csv,846,,,,
+/content/drive/MyDrive/ecg_fl_journal/results/stride512_vs_stride1_sen_ppv_f1_comparison.csv,2693,,,,
+/content/drive/MyDrive/ecg_fl_journal/cache/metadata/ptbxl_database.csv,6594879,,,,
+/content/drive/MyDrive/ecg_fl_journal/cache/metadata/scp_statements.csv,9804,,,,
+/content/drive/MyDrive/ecg_fl_journal/cache/metadata/split_manifest_200hz.json,1083,,,,

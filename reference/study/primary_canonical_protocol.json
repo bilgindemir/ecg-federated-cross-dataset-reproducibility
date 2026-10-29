@@ -1,0 +1,45 @@
+{
+  "checkpoint_selection": "best round by unweighted mean of PTB-XL and INCART validation ROC-AUC",
+  "code_hash": "0b9f67ac5d30270b791053942be0ec09af31fafe6da585af5b9d4b5620a27cf1",
+  "data_id": "9d68265b9e8940c9c1b1",
+  "local_epochs": 1,
+  "methods": [
+    "fedavg",
+    "fedavgm",
+    "fedprox",
+    "fedadam"
+  ],
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "selected_hyperparameters": {
+    "fedadam": {
+      "epsilon": 0.001,
+      "lr": 0.001,
+      "mean_validation": 0.8893570019046318,
+      "server_lr": 1.0
+    },
+    "fedavgm": {
+      "lr": 0.001,
+      "mean_validation": 0.8712625240948543,
+      "server_lr": 3.0
+    },
+    "fedprox": {
+      "lr": 0.001,
+      "mean_validation": 0.8833257271821092,
+      "mu": 3.0
+    }
+  },
+  "test_data_used_for_selection": false,
+  "tie_break": "earliest round on an exact tie",
+  "weighting": "equal"
+}

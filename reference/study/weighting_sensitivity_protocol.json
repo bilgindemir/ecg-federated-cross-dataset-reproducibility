@@ -1,0 +1,61 @@
+{
+  "checkpoint_selection": "best round by unweighted mean of PTB-XL and INCART validation ROC-AUC",
+  "client_sizes": [
+    12854,
+    12788,
+    8526,
+    30888
+  ],
+  "code_hash": "0b9f67ac5d30270b791053942be0ec09af31fafe6da585af5b9d4b5620a27cf1",
+  "data_id": "9d68265b9e8940c9c1b1",
+  "data_volume_alpha": [
+    0.19758362026561732,
+    0.19656910969011313,
+    0.13105632070831283,
+    0.4747909493359567
+  ],
+  "equal_client_alpha": [
+    0.25,
+    0.25,
+    0.25,
+    0.25
+  ],
+  "equal_domain_alpha": [
+    0.16666666666666666,
+    0.16666666666666666,
+    0.16666666666666666,
+    0.5
+  ],
+  "local_epochs": 1,
+  "methods": [
+    "fedavg",
+    "fedavgm",
+    "fedprox",
+    "fedadam"
+  ],
+  "rounds": 20,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "selected_hyperparameters": {
+    "fedadam": {
+      "epsilon": 0.001,
+      "lr": 0.001,
+      "mean_validation": 0.8893570019046318,
+      "server_lr": 1.0
+    },
+    "fedavgm": {
+      "lr": 0.001,
+      "mean_validation": 0.8712625240948543,
+      "server_lr": 3.0
+    },
+    "fedprox": {
+      "lr": 0.001,
+      "mean_validation": 0.8833257271821092,
+      "mu": 3.0
+    }
+  },
+  "test_data_used_for_selection": false
+}

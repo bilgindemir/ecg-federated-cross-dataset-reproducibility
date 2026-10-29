@@ -1,0 +1,722 @@
+# Priority #12B — INCART MIA + validation-vs-test control
+#
+# True attack:
+#   training patients (members) vs test patients (non-members)
+#
+# Distribution-shift control:
+#   validation patients ("pseudo-members") vs test patients
+#   Both groups are unseen during training.
+#
+# Same score in both cases:
+#   negative patient-mean cross-entropy loss.
+#
+# 4 methods x 10 canonical seeds.
+# Restart-safe: saves after every checkpoint.
+
+from pathlib import Path
+import numpy as np
+import pandas as pd
+import torch
+from tqdm.auto import tqdm
+
+from sklearn.metrics import roc_auc_score
+from scipy.stats import t as student_t
+
+from ecg_revision.data import (
+    beat_counts,
+    labels_from_counts,
+    MIN_BEATS,
+    WIN,
+)
+
+from ecg_revision.training import (
+    load_checkpoint,
+    CNN,
+    device_name,
+)
+
+
+base_dir = Path(BASE_DIR)
+root = base_dir / "study"
+
+primary = pd.read_csv(
+    root / "primary_canonical_runs.csv"
+)
+
+assert len(primary) == 40
+assert set(primary["seed"]) == set(range(10))
+assert set(primary["method"]) == {
+    "fedavg",
+    "fedavgm",
+    "fedprox",
+    "fedadam",
+}
+
+
+PROGRESS_PATH = (
+    root /
+    "mia_incart_canonical_control_rows.csv"
+)
+
+if PROGRESS_PATH.exists():
+
+    progress = pd.read_csv(
+        PROGRESS_PATH
+    )
+
+    print(
+        "Recovered",
+        len(progress),
+        "completed checkpoints."
+    )
+
+else:
+
+    progress = pd.DataFrame()
+
+
+device = device_name()
+
+print(
+    "\nPriority #12B — "
+    "INCART membership-inference control"
+)
+
+print("Device:", device)
+print("Canonical checkpoints: 40")
+print("Seeds: 0-9")
+
+print(
+    "True MIA: train vs test"
+)
+
+print(
+    "Control: validation vs test "
+    "(both unseen)"
+)
+
+print(
+    "Unit of inference: patient"
+)
+
+print(
+    "Score: negative mean "
+    "cross-entropy loss"
+)
+
+print(
+    "No model training or selection.\n"
+)
+
+
+# ----------------------------------------------------------
+# Patient-level loss scores for one split
+# ----------------------------------------------------------
+
+def patient_loss_scores(
+    model,
+    ckpt,
+    scope,
+):
+
+    frame = local_store.select_records(
+        scope
+    )
+
+    frame = frame[
+        frame["domain"] == "INCART"
+    ].copy()
+
+    # For the member split, use only records
+    # actually recorded as exposed by this checkpoint.
+    if scope == "train":
+
+        exposed = set(
+            ckpt.get(
+                "seen_records",
+                []
+            )
+        )
+
+        if not exposed:
+            raise ValueError(
+                "Checkpoint has no "
+                "training-exposure ledger."
+            )
+
+        frame = frame[
+            frame["rid"].isin(exposed)
+        ]
+
+    record_rows = []
+
+    for row in frame.itertuples(
+        index=False
+    ):
+
+        x, beats, abnormal = (
+            local_store.signal(row)
+        )
+
+        starts = np.arange(
+            0,
+            x.shape[1] - WIN + 1,
+            512,
+            dtype=np.int64,
+        )
+
+        total, ab = beat_counts(
+            beats,
+            abnormal,
+            starts,
+        )
+
+        eligible = (
+            total >= MIN_BEATS
+        )
+
+        starts = starts[eligible]
+        total = total[eligible]
+        ab = ab[eligible]
+
+        y = labels_from_counts(
+            total,
+            ab,
+            0.05,
+        ).astype(np.int8)
+
+        p = np.empty(
+            len(starts),
+            dtype=np.float32,
+        )
+
+        with torch.inference_mode():
+
+            for j in range(
+                0,
+                len(starts),
+                256,
+            ):
+
+                batch_starts = (
+                    starts[j:j + 256]
+                )
+
+                xb = torch.from_numpy(
+                    np.stack([
+                        x[
+                            :,
+                            int(s):
+                            int(s) + WIN
+                        ]
+                        for s
+                        in batch_starts
+                    ])
+                ).to(device)
+
+                p[
+                    j:
+                    j + len(batch_starts)
+                ] = (
+                    model(xb)
+                    .sigmoid()
+                    .cpu()
+                    .numpy()
+                )
+
+        prob = np.clip(
+            p.astype(float),
+            1e-7,
+            1 - 1e-7,
+        )
+
+        loss = -(
+            y * np.log(prob)
+            +
+            (1 - y)
+            * np.log1p(-prob)
+        )
+
+        record_rows.append({
+            "patient":
+                str(row.patient),
+
+            "rid":
+                str(row.rid),
+
+            "loss":
+                float(loss.mean()),
+
+            "prevalence":
+                float(y.mean()),
+
+            "windows":
+                int(len(y)),
+        })
+
+
+    per_record = pd.DataFrame(
+        record_rows
+    )
+
+    # Each recording contributes equally
+    # within a patient.
+    patients = (
+        per_record
+        .groupby("patient")
+        .agg(
+            loss=("loss", "mean"),
+            prevalence=(
+                "prevalence",
+                "mean"
+            ),
+            records=("rid", "size"),
+            windows=("windows", "sum"),
+        )
+        .reset_index()
+    )
+
+    # Fixed attack orientation:
+    # lower loss => more likely member.
+    patients["score"] = (
+        -patients["loss"]
+    )
+
+    return patients
+
+
+# ----------------------------------------------------------
+# Canonical checkpoints
+# ----------------------------------------------------------
+
+for idx, run in enumerate(
+    primary.itertuples(index=False),
+    start=1,
+):
+
+    method = run.method
+    seed = int(run.seed)
+
+    if not progress.empty:
+
+        already = progress[
+            (progress["method"] == method)
+            &
+            (progress["seed"] == seed)
+        ]
+
+        if len(already) == 1:
+
+            print(
+                f"[{idx}/40] "
+                f"{method} seed={seed} "
+                "already complete — skipped"
+            )
+
+            continue
+
+
+    checkpoint = (
+        Path(run.run_path)
+        / "best.pt"
+    )
+
+    ckpt = load_checkpoint(
+        checkpoint
+    )
+
+    assert (
+        ckpt["data_id"]
+        ==
+        local_store.data_id
+    )
+
+    if (
+        ckpt.get("origin")
+        !=
+        "clean_patient_disjoint"
+    ):
+        raise ValueError(
+            "Non-patient-disjoint "
+            "checkpoint encountered."
+        )
+
+
+    model = CNN(
+        ckpt["config"][
+            "architecture"
+        ]
+    ).to(device)
+
+    model.load_state_dict(
+        ckpt["state"],
+        strict=True,
+    )
+
+    model.eval()
+
+
+    print(
+        f"\n[{idx}/40] "
+        f"{method} seed={seed}"
+    )
+
+
+    train_patients = (
+        patient_loss_scores(
+            model,
+            ckpt,
+            "train",
+        )
+    )
+
+    val_patients = (
+        patient_loss_scores(
+            model,
+            ckpt,
+            "val",
+        )
+    )
+
+    test_patients = (
+        patient_loss_scores(
+            model,
+            ckpt,
+            "test",
+        )
+    )
+
+
+    # ------------------------------------------------------
+    # TRUE membership attack:
+    # train patients vs test patients
+    # ------------------------------------------------------
+
+    actual = pd.concat(
+        [
+            train_patients.assign(
+                member=1
+            ),
+            test_patients.assign(
+                member=0
+            ),
+        ],
+        ignore_index=True,
+    )
+
+    actual_auc = roc_auc_score(
+        actual["member"],
+        actual["score"],
+    )
+
+
+    # ------------------------------------------------------
+    # Distribution-shift control:
+    # validation vs test
+    # BOTH are unseen during training
+    # ------------------------------------------------------
+
+    control = pd.concat(
+        [
+            val_patients.assign(
+                member=1
+            ),
+            test_patients.assign(
+                member=0
+            ),
+        ],
+        ignore_index=True,
+    )
+
+    control_auc = roc_auc_score(
+        control["member"],
+        control["score"],
+    )
+
+
+    delta = (
+        actual_auc
+        -
+        control_auc
+    )
+
+
+    result = pd.DataFrame([{
+        "method": method,
+        "seed": seed,
+
+        "actual_attack_auc":
+            actual_auc,
+
+        "control_val_test_auc":
+            control_auc,
+
+        "auc_above_control":
+            delta,
+
+        "train_patients":
+            train_patients[
+                "patient"
+            ].nunique(),
+
+        "val_patients":
+            val_patients[
+                "patient"
+            ].nunique(),
+
+        "test_patients":
+            test_patients[
+                "patient"
+            ].nunique(),
+
+        "train_records":
+            int(
+                train_patients[
+                    "records"
+                ].sum()
+            ),
+
+        "val_records":
+            int(
+                val_patients[
+                    "records"
+                ].sum()
+            ),
+
+        "test_records":
+            int(
+                test_patients[
+                    "records"
+                ].sum()
+            ),
+
+        "train_mean_prevalence":
+            train_patients[
+                "prevalence"
+            ].mean(),
+
+        "val_mean_prevalence":
+            val_patients[
+                "prevalence"
+            ].mean(),
+
+        "test_mean_prevalence":
+            test_patients[
+                "prevalence"
+            ].mean(),
+    }])
+
+
+    progress = pd.concat(
+        [progress, result],
+        ignore_index=True,
+    )
+
+    progress = (
+        progress
+        .drop_duplicates(
+            ["method", "seed"],
+            keep="last",
+        )
+        .sort_values(
+            ["method", "seed"]
+        )
+        .reset_index(drop=True)
+    )
+
+    progress.to_csv(
+        PROGRESS_PATH,
+        index=False,
+    )
+
+
+    print(
+        f"  true MIA AUC = "
+        f"{actual_auc:.4f}"
+    )
+
+    print(
+        f"  val-vs-test control AUC = "
+        f"{control_auc:.4f}"
+    )
+
+    print(
+        f"  AUC above control = "
+        f"{delta:+.4f}"
+    )
+
+    print(
+        f"Saved progress: "
+        f"{len(progress)}/40"
+    )
+
+
+    del model
+
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+
+
+# ----------------------------------------------------------
+# Final matched 10-seed summary
+# ----------------------------------------------------------
+
+if len(progress) != 40:
+
+    print(
+        f"\nINCOMPLETE: "
+        f"{len(progress)}/40 checkpoints."
+    )
+
+    print(
+        "Rerun this same cell after "
+        "reconnecting. Completed "
+        "checkpoints will be skipped."
+    )
+
+else:
+
+    summary_rows = []
+
+    for method, frame in (
+        progress.groupby("method")
+    ):
+
+        actual = frame[
+            "actual_attack_auc"
+        ].to_numpy()
+
+        control = frame[
+            "control_val_test_auc"
+        ].to_numpy()
+
+        delta = frame[
+            "auc_above_control"
+        ].to_numpy()
+
+        n = len(delta)
+
+        delta_mean = float(
+            delta.mean()
+        )
+
+        delta_sd = float(
+            delta.std(ddof=1)
+        )
+
+        half_width = float(
+            student_t.ppf(
+                0.975,
+                n - 1,
+            )
+            *
+            delta_sd
+            /
+            np.sqrt(n)
+        )
+
+        summary_rows.append({
+            "method": method,
+            "n_seeds": n,
+
+            "actual_auc_mean":
+                float(actual.mean()),
+
+            "actual_auc_sd":
+                float(
+                    actual.std(ddof=1)
+                ),
+
+            "control_auc_mean":
+                float(control.mean()),
+
+            "control_auc_sd":
+                float(
+                    control.std(ddof=1)
+                ),
+
+            "delta_auc_mean":
+                delta_mean,
+
+            "delta_auc_sd":
+                delta_sd,
+
+            "delta_auc_ci95_low":
+                delta_mean
+                -
+                half_width,
+
+            "delta_auc_ci95_high":
+                delta_mean
+                +
+                half_width,
+
+            "train_patients":
+                int(
+                    frame[
+                        "train_patients"
+                    ].iloc[0]
+                ),
+
+            "val_patients":
+                int(
+                    frame[
+                        "val_patients"
+                    ].iloc[0]
+                ),
+
+            "test_patients":
+                int(
+                    frame[
+                        "test_patients"
+                    ].iloc[0]
+                ),
+        })
+
+
+    summary = pd.DataFrame(
+        summary_rows
+    )
+
+    summary.to_csv(
+        root /
+        "mia_incart_canonical_control_summary.csv",
+        index=False,
+    )
+
+    print(
+        "\nINCART CANONICAL MIA "
+        "+ DISTRIBUTION-SHIFT CONTROL"
+    )
+
+    print(
+        summary.to_string(
+            index=False
+        )
+    )
+
+    print(
+        "\nInterpretation target:"
+    )
+
+    print(
+        "actual_attack_auc = "
+        "train vs test"
+    )
+
+    print(
+        "control_auc = "
+        "validation vs test; "
+        "both unseen"
+    )
+
+    print(
+        "delta_auc = "
+        "actual attack minus "
+        "distribution-shift control"
+    )
+
+    print(
+        "\nNo training, model selection, "
+        "or test-based tuning was performed."
+    )

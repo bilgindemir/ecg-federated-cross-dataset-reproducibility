@@ -1,0 +1,20 @@
+[
+  {
+    "approximate_candidates_per_model": 5743632,
+    "batch_size": 256,
+    "device": "cuda",
+    "domain": "INCART",
+    "limitation": "Estimate from one recording, warm GPU batches; excludes I/O, CPU metrics and interruption overhead",
+    "optimistic_inference_hours_per_model": 0.07505059455416188,
+    "windows_per_second": 21258.370340849735
+  },
+  {
+    "approximate_candidates_per_model": 2108366,
+    "batch_size": 256,
+    "device": "cuda",
+    "domain": "PTB",
+    "limitation": "Estimate from one recording, warm GPU batches; excludes I/O, CPU metrics and interruption overhead",
+    "optimistic_inference_hours_per_model": 0.024969489664501444,
+    "windows_per_second": 23454.91358018573
+  }
+]

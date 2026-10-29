@@ -1,0 +1,12 @@
+PASS: 40 complete canonical runs; 800 round histories; 80 held-out domain rows; rounded manuscript ROC-AUC values match.
+                 roc_auc           average_precision                 mcc          
+                    mean       std              mean       std      mean       std
+method  domain                                                                    
+fedadam INCART  0.821559  0.024341          0.780323  0.034766  0.199226  0.179913
+        PTB     0.852803  0.016159          0.891350  0.013280  0.188433  0.158570
+fedavg  INCART  0.775582  0.026698          0.704692  0.028042  0.416319  0.050305
+        PTB     0.911090  0.006267          0.941239  0.004230  0.608682  0.031410
+fedavgm INCART  0.792354  0.054442          0.731898  0.086010  0.412303  0.087229
+        PTB     0.888224  0.017782          0.921560  0.010351  0.512753  0.126184
+fedprox INCART  0.734369  0.037462          0.651998  0.037738  0.385428  0.066813
+        PTB     0.884733  0.004693          0.920626  0.003550  0.569796  0.021428

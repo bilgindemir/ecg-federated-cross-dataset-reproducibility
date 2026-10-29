@@ -1,0 +1,1122 @@
+[
+  {
+    "aggregation_s": 0.0037241700001686695,
+    "alpha": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "client_stats": [
+      {
+        "client": 0,
+        "examples": 12854,
+        "mean_loss": 0.6759282916909487,
+        "n_eligible": 12854,
+        "seen_windows": 8078,
+        "train_s": 2.5136371160006092,
+        "updates": 201
+      },
+      {
+        "client": 1,
+        "examples": 12788,
+        "mean_loss": 0.6736279772265389,
+        "n_eligible": 12788,
+        "seen_windows": 8105,
+        "train_s": 2.3707298190001893,
+        "updates": 200
+      },
+      {
+        "client": 2,
+        "examples": 8526,
+        "mean_loss": 0.6754772525535009,
+        "n_eligible": 8526,
+        "seen_windows": 5346,
+        "train_s": 1.6112498949996734,
+        "updates": 134
+      },
+      {
+        "client": 3,
+        "examples": 30888,
+        "mean_loss": 0.6816866429504784,
+        "n_eligible": 30888,
+        "seen_windows": 19410,
+        "train_s": 5.733027120999395,
+        "updates": 483
+      }
+    ],
+    "incart_auc": 0.7969482407728556,
+    "macro_domain_auc": 0.8300911562499079,
+    "pooled_auc": 0.726685162234962,
+    "ptb_auc": 0.8632340717269602,
+    "round": 1,
+    "round_without_checkpoint_io_s": 13.214623642999868,
+    "selection_score": 0.8300911562499079,
+    "training_aggregation_s": 12.267833241000517,
+    "validation_s": 0.9467904019993512
+  },
+  {
+    "aggregation_s": 0.0036931249996996485,
+    "alpha": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "client_stats": [
+      {
+        "client": 0,
+        "examples": 12854,
+        "mean_loss": 0.6163329314866518,
+        "n_eligible": 12854,
+        "seen_windows": 8029,
+        "train_s": 2.35500780700022,
+        "updates": 201
+      },
+      {
+        "client": 1,
+        "examples": 12788,
+        "mean_loss": 0.6123499180847755,
+        "n_eligible": 12788,
+        "seen_windows": 8006,
+        "train_s": 2.3434476279999217,
+        "updates": 200
+      },
+      {
+        "client": 2,
+        "examples": 8526,
+        "mean_loss": 0.6142576145169435,
+        "n_eligible": 8526,
+        "seen_windows": 5328,
+        "train_s": 1.5554422069999418,
+        "updates": 134
+      },
+      {
+        "client": 3,
+        "examples": 30888,
+        "mean_loss": 0.6518082305638477,
+        "n_eligible": 30888,
+        "seen_windows": 19316,
+        "train_s": 5.7173390930001915,
+        "updates": 483
+      }
+    ],
+    "incart_auc": 0.8286466332935782,
+    "macro_domain_auc": 0.855557837732924,
+    "pooled_auc": 0.7481015641485153,
+    "ptb_auc": 0.8824690421722698,
+    "round": 2,
+    "round_without_checkpoint_io_s": 12.928604679999808,
+    "selection_score": 0.855557837732924,
+    "training_aggregation_s": 12.010041836999335,
+    "validation_s": 0.9185628430004726
+  },
+  {
+    "aggregation_s": 0.003695248999974865,
+    "alpha": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "client_stats": [
+      {
+        "client": 0,
+        "examples": 12854,
+        "mean_loss": 0.5679938479161326,
+        "n_eligible": 12854,
+        "seen_windows": 8065,
+        "train_s": 2.381528494000122,
+        "updates": 201
+      },
+      {
+        "client": 1,
+        "examples": 12788,
+        "mean_loss": 0.5676573170957843,
+        "n_eligible": 12788,
+        "seen_windows": 8032,
+        "train_s": 2.344019677999313,
+        "updates": 200
+      },
+      {
+        "client": 2,
+        "examples": 8526,
+        "mean_loss": 0.5655470822105211,
+        "n_eligible": 8526,
+        "seen_windows": 5318,
+        "train_s": 1.5597151060001124,
+        "updates": 134
+      },
+      {
+        "client": 3,
+        "examples": 30888,
+        "mean_loss": 0.6265028620037938,
+        "n_eligible": 30888,
+        "seen_windows": 19360,
+        "train_s": 5.725285425000038,
+        "updates": 483
+      }
+    ],
+    "incart_auc": 0.8386592234921352,
+    "macro_domain_auc": 0.8601328124089167,
+    "pooled_auc": 0.7580042618068992,
+    "ptb_auc": 0.8816064013256983,
+    "round": 3,
+    "round_without_checkpoint_io_s": 12.972496144000615,
+    "selection_score": 0.8601328124089167,
+    "training_aggregation_s": 12.049475668000014,
+    "validation_s": 0.9230204760006018
+  },
+  {
+    "aggregation_s": 0.00410434199966403,
+    "alpha": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "client_stats": [
+      {
+        "client": 0,
+        "examples": 12854,
+        "mean_loss": 0.5325211114371121,
+        "n_eligible": 12854,
+        "seen_windows": 8048,
+        "train_s": 2.3853100520000226,
+        "updates": 201
+      },
+      {
+        "client": 1,
+        "examples": 12788,
+        "mean_loss": 0.5277516533890702,
+        "n_eligible": 12788,
+        "seen_windows": 7974,
+        "train_s": 2.3555611100000533,
+        "updates": 200
+      },
+      {
+        "client": 2,
+        "examples": 8526,
+        "mean_loss": 0.5304720507047279,
+        "n_eligible": 8526,
+        "seen_windows": 5386,
+        "train_s": 1.5635164150007768,
+        "updates": 134
+      },
+      {
+        "client": 3,
+        "examples": 30888,
+        "mean_loss": 0.6000112272148705,
+        "n_eligible": 30888,
+        "seen_windows": 19521,
+        "train_s": 5.675049442000272,
+        "updates": 483
+      }
+    ],
+    "incart_auc": 0.8556035171269815,
+    "macro_domain_auc": 0.8668845063682025,
+    "pooled_auc": 0.759210545346834,
+    "ptb_auc": 0.8781654956094234,
+    "round": 4,
+    "round_without_checkpoint_io_s": 12.931852947999687,
+    "selection_score": 0.8668845063682025,
+    "training_aggregation_s": 12.021075734999613,
+    "validation_s": 0.910777213000074
+  },
+  {
+    "aggregation_s": 0.006085252000048058,
+    "alpha": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "client_stats": [
+      {
+        "client": 0,
+        "examples": 12854,
+        "mean_loss": 0.5033077148241557,
+        "n_eligible": 12854,
+        "seen_windows": 8087,
+        "train_s": 2.3871909399995275,
+        "updates": 201
+      },
+      {
+        "client": 1,
+        "examples": 12788,
+        "mean_loss": 0.499830827708911,
+        "n_eligible": 12788,
+        "seen_windows": 8073,
+        "train_s": 2.356241204000071,
+        "updates": 200
+      },
+      {
+        "client": 2,
+        "examples": 8526,
+        "mean_loss": 0.4989428396043771,
+        "n_eligible": 8526,
+        "seen_windows": 5365,
+        "train_s": 1.5942499940001653,
+        "updates": 134
+      },
+      {
+        "client": 3,
+        "examples": 30888,
+        "mean_loss": 0.5771485315459715,
+        "n_eligible": 30888,
+        "seen_windows": 19454,
+        "train_s": 5.719080392000251,
+        "updates": 483
+      }
+    ],
+    "incart_auc": 0.8646033945569954,
+    "macro_domain_auc": 0.8724697673785289,
+    "pooled_auc": 0.7633942983720532,
+    "ptb_auc": 0.8803361402000625,
+    "round": 5,
+    "round_without_checkpoint_io_s": 13.012682645000496,
+    "selection_score": 0.8724697673785289,
+    "training_aggregation_s": 12.099695159000476,
+    "validation_s": 0.91298748600002
+  },
+  {
+    "aggregation_s": 0.0037658960000044317,
+    "alpha": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "client_stats": [
+      {
+        "client": 0,
+        "examples": 12854,
+        "mean_loss": 0.48206015839831945,
+        "n_eligible": 12854,
+        "seen_windows": 8038,
+        "train_s": 2.3760797060003824,
+        "updates": 201
+      },
+      {
+        "client": 1,
+        "examples": 12788,
+        "mean_loss": 0.4720925770217566,
+        "n_eligible": 12788,
+        "seen_windows": 7987,
+        "train_s": 2.3460252659997423,
+        "updates": 200
+      },
+      {
+        "client": 2,
+        "examples": 8526,
+        "mean_loss": 0.4795289501572282,
+        "n_eligible": 8526,
+        "seen_windows": 5379,
+        "train_s": 1.6007118919997083,
+        "updates": 134
+      },
+      {
+        "client": 3,
+        "examples": 30888,
+        "mean_loss": 0.5591545397832091,
+        "n_eligible": 30888,
+        "seen_windows": 19320,
+        "train_s": 5.710083402999771,
+        "updates": 483
+      }
+    ],
+    "incart_auc": 0.862503136336179,
+    "macro_domain_auc": 0.8730678806165819,
+    "pooled_auc": 0.7617166403647203,
+    "ptb_auc": 0.8836326248969848,
+    "round": 6,
+    "round_without_checkpoint_io_s": 13.000501503999658,
+    "selection_score": 0.8730678806165819,
+    "training_aggregation_s": 12.07355365300009,
+    "validation_s": 0.9269478509995679
+  },
+  {
+    "aggregation_s": 0.0034785349998855963,
+    "alpha": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "client_stats": [
+      {
+        "client": 0,
+        "examples": 12854,
+        "mean_loss": 0.4642225861067124,
+        "n_eligible": 12854,
+        "seen_windows": 8052,
+        "train_s": 2.3404778500007524,
+        "updates": 201
+      },
+      {
+        "client": 1,
+        "examples": 12788,
+        "mean_loss": 0.45782691887255045,
+        "n_eligible": 12788,
+        "seen_windows": 7951,
+        "train_s": 2.3862506790001135,
+        "updates": 200
+      },
+      {
+        "client": 2,
+        "examples": 8526,
+        "mean_loss": 0.467886005506643,
+        "n_eligible": 8526,
+        "seen_windows": 5351,
+        "train_s": 1.577562030000081,
+        "updates": 134
+      },
+      {
+        "client": 3,
+        "examples": 30888,
+        "mean_loss": 0.5349114776213408,
+        "n_eligible": 30888,
+        "seen_windows": 19406,
+        "train_s": 5.698160381999514,
+        "updates": 483
+      }
+    ],
+    "incart_auc": 0.8701328662309253,
+    "macro_domain_auc": 0.8775427973557083,
+    "pooled_auc": 0.7659850648533679,
+    "ptb_auc": 0.8849527284804912,
+    "round": 7,
+    "round_without_checkpoint_io_s": 12.947408925000673,
+    "selection_score": 0.8775427973557083,
+    "training_aggregation_s": 12.040747246000137,
+    "validation_s": 0.9066616790005355
+  },
+  {
+    "aggregation_s": 0.0059607510002024355,
+    "alpha": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "client_stats": [
+      {
+        "client": 0,
+        "examples": 12854,
+        "mean_loss": 0.45263176393653587,
+        "n_eligible": 12854,
+        "seen_windows": 8071,
+        "train_s": 2.3754809789998035,
+        "updates": 201
+      },
+      {
+        "client": 1,
+        "examples": 12788,
+        "mean_loss": 0.44747806829626124,
+        "n_eligible": 12788,
+        "seen_windows": 7993,
+        "train_s": 2.3754665650003517,
+        "updates": 200
+      },
+      {
+        "client": 2,
+        "examples": 8526,
+        "mean_loss": 0.4470702095571997,
+        "n_eligible": 8526,
+        "seen_windows": 5344,
+        "train_s": 1.614160176999576,
+        "updates": 134
+      },
+      {
+        "client": 3,
+        "examples": 30888,
+        "mean_loss": 0.5152214367644091,
+        "n_eligible": 30888,
+        "seen_windows": 19394,
+        "train_s": 5.811717352999949,
+        "updates": 483
+      }
+    ],
+    "incart_auc": 0.8569117617847288,
+    "macro_domain_auc": 0.8723699058717613,
+    "pooled_auc": 0.7658003073018365,
+    "ptb_auc": 0.8878280499587939,
+    "round": 8,
+    "round_without_checkpoint_io_s": 13.130915953000112,
+    "selection_score": 0.8723699058717613,
+    "training_aggregation_s": 12.2181255710002,
+    "validation_s": 0.9127903819999119
+  },
+  {
+    "aggregation_s": 0.003547640000761021,
+    "alpha": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "client_stats": [
+      {
+        "client": 0,
+        "examples": 12854,
+        "mean_loss": 0.44376026786966977,
+        "n_eligible": 12854,
+        "seen_windows": 8052,
+        "train_s": 2.3803559380003207,
+        "updates": 201
+      },
+      {
+        "client": 1,
+        "examples": 12788,
+        "mean_loss": 0.43849937789769033,
+        "n_eligible": 12788,
+        "seen_windows": 8030,
+        "train_s": 2.3835271389998525,
+        "updates": 200
+      },
+      {
+        "client": 2,
+        "examples": 8526,
+        "mean_loss": 0.4540867158051195,
+        "n_eligible": 8526,
+        "seen_windows": 5370,
+        "train_s": 1.585939545000656,
+        "updates": 134
+      },
+      {
+        "client": 3,
+        "examples": 30888,
+        "mean_loss": 0.4992960196444791,
+        "n_eligible": 30888,
+        "seen_windows": 19375,
+        "train_s": 5.664448192999771,
+        "updates": 483
+      }
+    ],
+    "incart_auc": 0.862515127873266,
+    "macro_domain_auc": 0.8755739918331347,
+    "pooled_auc": 0.7691027717595358,
+    "ptb_auc": 0.8886328557930034,
+    "round": 9,
+    "round_without_checkpoint_io_s": 12.959418843000094,
+    "selection_score": 0.8755739918331347,
+    "training_aggregation_s": 12.058545059000608,
+    "validation_s": 0.9008737839994865
+  },
+  {
+    "aggregation_s": 0.004459366999981285,
+    "alpha": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "client_stats": [
+      {
+        "client": 0,
+        "examples": 12854,
+        "mean_loss": 0.4421449284429626,
+        "n_eligible": 12854,
+        "seen_windows": 8090,
+        "train_s": 2.3436259379996045,
+        "updates": 201
+      },
+      {
+        "client": 1,
+        "examples": 12788,
+        "mean_loss": 0.4334464022842541,
+        "n_eligible": 12788,
+        "seen_windows": 8015,
+        "train_s": 2.3248095799999646,
+        "updates": 200
+      },
+      {
+        "client": 2,
+        "examples": 8526,
+        "mean_loss": 0.43753752268286283,
+        "n_eligible": 8526,
+        "seen_windows": 5337,
+        "train_s": 1.5886131520001072,
+        "updates": 134
+      },
+      {
+        "client": 3,
+        "examples": 30888,
+        "mean_loss": 0.48353529961360486,
+        "n_eligible": 30888,
+        "seen_windows": 19297,
+        "train_s": 5.644678395000483,
+        "updates": 483
+      }
+    ],
+    "incart_auc": 0.8730381593594725,
+    "macro_domain_auc": 0.8813135067379079,
+    "pooled_auc": 0.7750597415771856,
+    "ptb_auc": 0.8895888541163433,
+    "round": 10,
+    "round_without_checkpoint_io_s": 12.861389634999796,
+    "selection_score": 0.8813135067379079,
+    "training_aggregation_s": 11.948347343000023,
+    "validation_s": 0.9130422919997727
+  },
+  {
+    "aggregation_s": 0.004005606999271549,
+    "alpha": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "client_stats": [
+      {
+        "client": 0,
+        "examples": 12854,
+        "mean_loss": 0.4362700620780044,
+        "n_eligible": 12854,
+        "seen_windows": 8077,
+        "train_s": 2.32802226900003,
+        "updates": 201
+      },
+      {
+        "client": 1,
+        "examples": 12788,
+        "mean_loss": 0.42261833730883475,
+        "n_eligible": 12788,
+        "seen_windows": 7957,
+        "train_s": 2.352152690999901,
+        "updates": 200
+      },
+      {
+        "client": 2,
+        "examples": 8526,
+        "mean_loss": 0.4296695400704919,
+        "n_eligible": 8526,
+        "seen_windows": 5360,
+        "train_s": 1.56215159400017,
+        "updates": 134
+      },
+      {
+        "client": 3,
+        "examples": 30888,
+        "mean_loss": 0.47366687765056004,
+        "n_eligible": 30888,
+        "seen_windows": 19437,
+        "train_s": 5.685658313000204,
+        "updates": 483
+      }
+    ],
+    "incart_auc": 0.8594704445683875,
+    "macro_domain_auc": 0.875207573374023,
+    "pooled_auc": 0.7650895801694222,
+    "ptb_auc": 0.8909447021796584,
+    "round": 11,
+    "round_without_checkpoint_io_s": 12.878921840999283,
+    "selection_score": 0.875207573374023,
+    "training_aggregation_s": 11.970883442999366,
+    "validation_s": 0.9080383979999169
+  },
+  {
+    "aggregation_s": 0.003805527000622533,
+    "alpha": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "client_stats": [
+      {
+        "client": 0,
+        "examples": 12854,
+        "mean_loss": 0.43393594418396303,
+        "n_eligible": 12854,
+        "seen_windows": 8046,
+        "train_s": 2.4064715899994553,
+        "updates": 201
+      },
+      {
+        "client": 1,
+        "examples": 12788,
+        "mean_loss": 0.41333755256982757,
+        "n_eligible": 12788,
+        "seen_windows": 8110,
+        "train_s": 2.3592062299994723,
+        "updates": 200
+      },
+      {
+        "client": 2,
+        "examples": 8526,
+        "mean_loss": 0.4337075283912994,
+        "n_eligible": 8526,
+        "seen_windows": 5328,
+        "train_s": 1.596579754999766,
+        "updates": 134
+      },
+      {
+        "client": 3,
+        "examples": 30888,
+        "mean_loss": 0.4566767562534858,
+        "n_eligible": 30888,
+        "seen_windows": 19380,
+        "train_s": 5.688817352000115,
+        "updates": 483
+      }
+    ],
+    "incart_auc": 0.8727872066959278,
+    "macro_domain_auc": 0.8817472872051353,
+    "pooled_auc": 0.7704854417983994,
+    "ptb_auc": 0.8907073677143427,
+    "round": 12,
+    "round_without_checkpoint_io_s": 12.994269234000058,
+    "selection_score": 0.8817472872051353,
+    "training_aggregation_s": 12.090142562999972,
+    "validation_s": 0.9041266710000855
+  },
+  {
+    "aggregation_s": 0.0036239649998606183,
+    "alpha": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "client_stats": [
+      {
+        "client": 0,
+        "examples": 12854,
+        "mean_loss": 0.42134202835217444,
+        "n_eligible": 12854,
+        "seen_windows": 8087,
+        "train_s": 2.363718014999904,
+        "updates": 201
+      },
+      {
+        "client": 1,
+        "examples": 12788,
+        "mean_loss": 0.4214986662287469,
+        "n_eligible": 12788,
+        "seen_windows": 8061,
+        "train_s": 2.376102395000089,
+        "updates": 200
+      },
+      {
+        "client": 2,
+        "examples": 8526,
+        "mean_loss": 0.4162328828536035,
+        "n_eligible": 8526,
+        "seen_windows": 5327,
+        "train_s": 1.5691533809995235,
+        "updates": 134
+      },
+      {
+        "client": 3,
+        "examples": 30888,
+        "mean_loss": 0.44911242395878703,
+        "n_eligible": 30888,
+        "seen_windows": 19389,
+        "train_s": 5.714243451000584,
+        "updates": 483
+      }
+    ],
+    "incart_auc": 0.8607577269208453,
+    "macro_domain_auc": 0.8762678264531192,
+    "pooled_auc": 0.7681550794457472,
+    "ptb_auc": 0.8917779259853931,
+    "round": 13,
+    "round_without_checkpoint_io_s": 12.991922213999715,
+    "selection_score": 0.8762678264531192,
+    "training_aggregation_s": 12.061642089999623,
+    "validation_s": 0.9302801240000917
+  },
+  {
+    "aggregation_s": 0.0033371449999322067,
+    "alpha": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "client_stats": [
+      {
+        "client": 0,
+        "examples": 12854,
+        "mean_loss": 0.42076681657028137,
+        "n_eligible": 12854,
+        "seen_windows": 8020,
+        "train_s": 2.386876782999934,
+        "updates": 201
+      },
+      {
+        "client": 1,
+        "examples": 12788,
+        "mean_loss": 0.4157889473613516,
+        "n_eligible": 12788,
+        "seen_windows": 8032,
+        "train_s": 2.3781390459998875,
+        "updates": 200
+      },
+      {
+        "client": 2,
+        "examples": 8526,
+        "mean_loss": 0.41989154227597036,
+        "n_eligible": 8526,
+        "seen_windows": 5292,
+        "train_s": 1.6203365910005232,
+        "updates": 134
+      },
+      {
+        "client": 3,
+        "examples": 30888,
+        "mean_loss": 0.4418899645786216,
+        "n_eligible": 30888,
+        "seen_windows": 19406,
+        "train_s": 5.674665101999381,
+        "updates": 483
+      }
+    ],
+    "incart_auc": 0.8868127281653103,
+    "macro_domain_auc": 0.8883974967874777,
+    "pooled_auc": 0.7779731749867005,
+    "ptb_auc": 0.8899822654096451,
+    "round": 14,
+    "round_without_checkpoint_io_s": 13.001854242000263,
+    "selection_score": 0.8883974967874777,
+    "training_aggregation_s": 12.098049461999835,
+    "validation_s": 0.9038047800004279
+  },
+  {
+    "aggregation_s": 0.005527587999495154,
+    "alpha": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "client_stats": [
+      {
+        "client": 0,
+        "examples": 12854,
+        "mean_loss": 0.42827377204151607,
+        "n_eligible": 12854,
+        "seen_windows": 8082,
+        "train_s": 2.4171388029999434,
+        "updates": 201
+      },
+      {
+        "client": 1,
+        "examples": 12788,
+        "mean_loss": 0.4145900971318246,
+        "n_eligible": 12788,
+        "seen_windows": 7963,
+        "train_s": 2.352886098000454,
+        "updates": 200
+      },
+      {
+        "client": 2,
+        "examples": 8526,
+        "mean_loss": 0.41098010152711184,
+        "n_eligible": 8526,
+        "seen_windows": 5412,
+        "train_s": 1.5671765010001764,
+        "updates": 134
+      },
+      {
+        "client": 3,
+        "examples": 30888,
+        "mean_loss": 0.43244687195918435,
+        "n_eligible": 30888,
+        "seen_windows": 19314,
+        "train_s": 5.713016837000396,
+        "updates": 483
+      }
+    ],
+    "incart_auc": 0.8726133294081645,
+    "macro_domain_auc": 0.8837635004695203,
+    "pooled_auc": 0.7727235046278547,
+    "ptb_auc": 0.8949136715308762,
+    "round": 15,
+    "round_without_checkpoint_io_s": 12.99845450400062,
+    "selection_score": 0.8837635004695203,
+    "training_aggregation_s": 12.097084985000038,
+    "validation_s": 0.9013695190005819
+  },
+  {
+    "aggregation_s": 0.003410174999771698,
+    "alpha": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "client_stats": [
+      {
+        "client": 0,
+        "examples": 12854,
+        "mean_loss": 0.4149399494909658,
+        "n_eligible": 12854,
+        "seen_windows": 8076,
+        "train_s": 2.355808884999533,
+        "updates": 201
+      },
+      {
+        "client": 1,
+        "examples": 12788,
+        "mean_loss": 0.4050816319064867,
+        "n_eligible": 12788,
+        "seen_windows": 7999,
+        "train_s": 2.333999976999621,
+        "updates": 200
+      },
+      {
+        "client": 2,
+        "examples": 8526,
+        "mean_loss": 0.4266628183698867,
+        "n_eligible": 8526,
+        "seen_windows": 5332,
+        "train_s": 1.5679701969993403,
+        "updates": 134
+      },
+      {
+        "client": 3,
+        "examples": 30888,
+        "mean_loss": 0.42377173361059484,
+        "n_eligible": 30888,
+        "seen_windows": 19461,
+        "train_s": 5.711665823000658,
+        "updates": 483
+      }
+    ],
+    "incart_auc": 0.8719761073658154,
+    "macro_domain_auc": 0.8829539023856273,
+    "pooled_auc": 0.7759272600108378,
+    "ptb_auc": 0.8939316974054392,
+    "round": 16,
+    "round_without_checkpoint_io_s": 12.932807406999927,
+    "selection_score": 0.8829539023856273,
+    "training_aggregation_s": 12.010515245999159,
+    "validation_s": 0.9222921610007688
+  },
+  {
+    "aggregation_s": 0.005164090999642212,
+    "alpha": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "client_stats": [
+      {
+        "client": 0,
+        "examples": 12854,
+        "mean_loss": 0.42865276149796794,
+        "n_eligible": 12854,
+        "seen_windows": 8066,
+        "train_s": 2.3592332090001946,
+        "updates": 201
+      },
+      {
+        "client": 1,
+        "examples": 12788,
+        "mean_loss": 0.4116430640649453,
+        "n_eligible": 12788,
+        "seen_windows": 8005,
+        "train_s": 2.3354571869995198,
+        "updates": 200
+      },
+      {
+        "client": 2,
+        "examples": 8526,
+        "mean_loss": 0.4225082217654291,
+        "n_eligible": 8526,
+        "seen_windows": 5337,
+        "train_s": 1.5859015160003764,
+        "updates": 134
+      },
+      {
+        "client": 3,
+        "examples": 30888,
+        "mean_loss": 0.41123053037079776,
+        "n_eligible": 30888,
+        "seen_windows": 19377,
+        "train_s": 5.658053547000236,
+        "updates": 483
+      }
+    ],
+    "incart_auc": 0.8670577463910738,
+    "macro_domain_auc": 0.881637712694386,
+    "pooled_auc": 0.7688543843016511,
+    "ptb_auc": 0.8962176789976981,
+    "round": 17,
+    "round_without_checkpoint_io_s": 12.88969624299989,
+    "selection_score": 0.881637712694386,
+    "training_aggregation_s": 11.979947859999811,
+    "validation_s": 0.9097483830000783
+  },
+  {
+    "aggregation_s": 0.0035324959999343264,
+    "alpha": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "client_stats": [
+      {
+        "client": 0,
+        "examples": 12854,
+        "mean_loss": 0.40863877164366014,
+        "n_eligible": 12854,
+        "seen_windows": 8094,
+        "train_s": 2.3682518249997884,
+        "updates": 201
+      },
+      {
+        "client": 1,
+        "examples": 12788,
+        "mean_loss": 0.4036933760886122,
+        "n_eligible": 12788,
+        "seen_windows": 8027,
+        "train_s": 2.3606717339998795,
+        "updates": 200
+      },
+      {
+        "client": 2,
+        "examples": 8526,
+        "mean_loss": 0.4153812755001506,
+        "n_eligible": 8526,
+        "seen_windows": 5309,
+        "train_s": 1.5710423119999177,
+        "updates": 134
+      },
+      {
+        "client": 3,
+        "examples": 30888,
+        "mean_loss": 0.4038565600668634,
+        "n_eligible": 30888,
+        "seen_windows": 19359,
+        "train_s": 5.718251278000025,
+        "updates": 483
+      }
+    ],
+    "incart_auc": 0.8595607243657323,
+    "macro_domain_auc": 0.8790985750832043,
+    "pooled_auc": 0.7725056294090433,
+    "ptb_auc": 0.8986364258006764,
+    "round": 18,
+    "round_without_checkpoint_io_s": 12.97606064699994,
+    "selection_score": 0.8790985750832043,
+    "training_aggregation_s": 12.055856401999336,
+    "validation_s": 0.9202042450006047
+  },
+  {
+    "aggregation_s": 0.0036098929995205253,
+    "alpha": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "client_stats": [
+      {
+        "client": 0,
+        "examples": 12854,
+        "mean_loss": 0.4077045301664334,
+        "n_eligible": 12854,
+        "seen_windows": 8045,
+        "train_s": 2.3526222210002743,
+        "updates": 201
+      },
+      {
+        "client": 1,
+        "examples": 12788,
+        "mean_loss": 0.4055209891904993,
+        "n_eligible": 12788,
+        "seen_windows": 8039,
+        "train_s": 2.3507901519997176,
+        "updates": 200
+      },
+      {
+        "client": 2,
+        "examples": 8526,
+        "mean_loss": 0.4014686298445863,
+        "n_eligible": 8526,
+        "seen_windows": 5330,
+        "train_s": 1.572981761999472,
+        "updates": 134
+      },
+      {
+        "client": 3,
+        "examples": 30888,
+        "mean_loss": 0.397923415774232,
+        "n_eligible": 30888,
+        "seen_windows": 19434,
+        "train_s": 5.707248896999772,
+        "updates": 483
+      }
+    ],
+    "incart_auc": 0.8484285731416482,
+    "macro_domain_auc": 0.8739252447182566,
+    "pooled_auc": 0.7657955620542662,
+    "ptb_auc": 0.8994219162948649,
+    "round": 19,
+    "round_without_checkpoint_io_s": 12.945345707000342,
+    "selection_score": 0.8739252447182566,
+    "training_aggregation_s": 12.02267718999974,
+    "validation_s": 0.9226685170006022
+  },
+  {
+    "aggregation_s": 0.0035449199995127856,
+    "alpha": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "client_stats": [
+      {
+        "client": 0,
+        "examples": 12854,
+        "mean_loss": 0.4060155944494432,
+        "n_eligible": 12854,
+        "seen_windows": 8018,
+        "train_s": 2.3608481490000486,
+        "updates": 201
+      },
+      {
+        "client": 1,
+        "examples": 12788,
+        "mean_loss": 0.3992156909803767,
+        "n_eligible": 12788,
+        "seen_windows": 8034,
+        "train_s": 2.353386827000577,
+        "updates": 200
+      },
+      {
+        "client": 2,
+        "examples": 8526,
+        "mean_loss": 0.4080077991669038,
+        "n_eligible": 8526,
+        "seen_windows": 5340,
+        "train_s": 1.5913832379992527,
+        "updates": 134
+      },
+      {
+        "client": 3,
+        "examples": 30888,
+        "mean_loss": 0.39179181809469815,
+        "n_eligible": 30888,
+        "seen_windows": 19428,
+        "train_s": 5.672423078000065,
+        "updates": 483
+      }
+    ],
+    "incart_auc": 0.8284404658172082,
+    "macro_domain_auc": 0.8650468184538029,
+    "pooled_auc": 0.7637182234347866,
+    "ptb_auc": 0.9016531710903977,
+    "round": 20,
+    "round_without_checkpoint_io_s": 12.929107122999994,
+    "selection_score": 0.8650468184538029,
+    "training_aggregation_s": 12.016568068999732,
+    "validation_s": 0.9125390540002627
+  }
+]

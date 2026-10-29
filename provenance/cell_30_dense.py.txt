@@ -1,0 +1,495 @@
+# Priority #12A — restart-safe canonical D1 evaluation
+# Uses the local cache you just created.
+# 4 methods x 10 seeds.
+# No retraining or D1-based model selection.
+
+from pathlib import Path
+import numpy as np
+import pandas as pd
+import torch
+from tqdm.auto import tqdm
+
+from ecg_revision.data import (
+    beat_counts,
+    labels_from_counts,
+    MIN_BEATS,
+    WIN,
+)
+from ecg_revision.evaluation import dense_starts
+from ecg_revision.training import (
+    load_checkpoint,
+    CNN,
+    device_name,
+)
+from ecg_revision.metrics import scores
+
+
+base_dir = Path(BASE_DIR)
+root = base_dir / "study"
+
+
+# ----------------------------------------------------------
+# Canonical primary runs
+# ----------------------------------------------------------
+
+primary = pd.read_csv(
+    root / "primary_canonical_runs.csv"
+)
+
+assert len(primary) == 40
+assert set(primary["seed"]) == set(range(10))
+assert set(primary["method"]) == {
+    "fedavg",
+    "fedavgm",
+    "fedprox",
+    "fedadam",
+}
+
+
+# ----------------------------------------------------------
+# Validation-tuned thresholds from #7
+# ----------------------------------------------------------
+
+thresholds = pd.read_csv(
+    root / "decision_threshold_tuning_runs.csv"
+)
+
+required = (
+    thresholds
+    .groupby(["method", "seed", "domain"])
+    .size()
+)
+
+assert len(required) == 80, len(required)
+
+
+def threshold_for(method, seed, domain):
+    x = thresholds[
+        (thresholds["method"] == method) &
+        (thresholds["seed"] == seed) &
+        (thresholds["domain"] == domain)
+    ]
+
+    if len(x) != 1:
+        raise ValueError(
+            f"Threshold lookup failed: "
+            f"{method}, seed={seed}, domain={domain}"
+        )
+
+    return float(x.iloc[0]["threshold"])
+
+
+# ----------------------------------------------------------
+# Restart-safe progress file
+# ----------------------------------------------------------
+
+PROGRESS_PATH = (
+    root / "d1_canonical_10seed_restart_safe_rows.csv"
+)
+
+if PROGRESS_PATH.exists():
+    progress = pd.read_csv(PROGRESS_PATH)
+
+    print(
+        f"Recovered {len(progress)} completed domain rows "
+        "from previous attempts."
+    )
+else:
+    progress = pd.DataFrame()
+
+
+# ----------------------------------------------------------
+# Device
+# ----------------------------------------------------------
+
+device = device_name()
+
+print("\nPriority #12A — canonical D1 evaluation")
+print("Device:", device)
+print("Methods: FedAvg, FedAvgM, FedProx, FedAdam")
+print("Seeds: 0-9")
+print("Canonical checkpoints: 40")
+print("PTB-XL D1: exhaustive stride-one")
+print(
+    "INCART D1: all held-out records, "
+    "deterministic 16,384 starts/record"
+)
+print("INCART tau: 0.05")
+print(
+    "Threshold metrics use validation-tuned "
+    "thresholds from #7."
+)
+print(
+    "No retraining, D1 checkpoint selection, "
+    "or D1 threshold tuning.\n"
+)
+
+
+# ----------------------------------------------------------
+# Evaluate all canonical checkpoints
+# ----------------------------------------------------------
+
+for idx, run in enumerate(
+    primary.itertuples(index=False),
+    start=1
+):
+
+    method = run.method
+    seed = int(run.seed)
+
+    # Skip checkpoint if both PTB and INCART
+    # were already completed previously.
+    if not progress.empty:
+
+        done = progress[
+            (progress["method"] == method) &
+            (progress["seed"] == seed)
+        ]["domain"].nunique()
+
+        if done == 2:
+            print(
+                f"[{idx}/40] {method} seed={seed} "
+                "already complete — skipped"
+            )
+            continue
+
+    checkpoint = Path(run.run_path) / "best.pt"
+
+    ckpt = load_checkpoint(checkpoint)
+
+    if ckpt["data_id"] != local_store.data_id:
+        raise ValueError(
+            "Checkpoint/data mismatch: "
+            f"{ckpt['data_id']} != "
+            f"{local_store.data_id}"
+        )
+
+    model = CNN(
+        ckpt["config"]["architecture"]
+    ).to(device)
+
+    model.load_state_dict(
+        ckpt["state"],
+        strict=True
+    )
+
+    model.eval()
+
+    checkpoint_rows = []
+
+    print(
+        f"\n[{idx}/40] "
+        f"{method} seed={seed}"
+    )
+
+
+    for domain in ("PTB", "INCART"):
+
+        selected = local_store.select_records("test")
+
+        selected = selected[
+            selected["domain"] == domain
+        ]
+
+        threshold = threshold_for(
+            method,
+            seed,
+            domain
+        )
+
+        labels_all = []
+        probabilities_all = []
+        patients = set()
+
+        for row in tqdm(
+            selected.itertuples(index=False),
+            total=len(selected),
+            desc=f"{method} s{seed} {domain}",
+            leave=False,
+        ):
+
+            x, beats, abnormal = local_store.signal(row)
+
+            starts = dense_starts(
+                x.shape[1],
+                row.rid,
+                16384 if domain == "INCART" else None,
+            )
+
+            if domain == "INCART":
+
+                total, ab = beat_counts(
+                    beats,
+                    abnormal,
+                    starts
+                )
+
+                eligible = total >= MIN_BEATS
+
+                starts = starts[eligible]
+                total = total[eligible]
+                ab = ab[eligible]
+
+                y = labels_from_counts(
+                    total,
+                    ab,
+                    0.05
+                )
+
+            else:
+
+                y = np.full(
+                    len(starts),
+                    row.label,
+                    dtype=np.int8
+                )
+
+            p = np.empty(
+                len(starts),
+                dtype=np.float32
+            )
+
+            with torch.inference_mode():
+
+                for j in range(
+                    0,
+                    len(starts),
+                    256
+                ):
+
+                    batch_starts = starts[j:j + 256]
+
+                    xb = torch.from_numpy(
+                        np.stack([
+                            x[
+                                :,
+                                int(s):int(s) + WIN
+                            ]
+                            for s in batch_starts
+                        ])
+                    ).to(device)
+
+                    p[
+                        j:j + len(batch_starts)
+                    ] = (
+                        model(xb)
+                        .sigmoid()
+                        .cpu()
+                        .numpy()
+                    )
+
+            labels_all.append(y)
+            probabilities_all.append(p)
+
+            patients.add(
+                str(row.patient)
+            )
+
+
+        y = np.concatenate(labels_all)
+        p = np.concatenate(probabilities_all)
+
+        m = scores(
+            y,
+            p,
+            threshold=threshold
+        )
+
+        checkpoint_rows.append({
+            "method": method,
+            "seed": seed,
+            "domain": domain,
+
+            "n_records": len(selected),
+            "n_patients": len(patients),
+            "n_windows": len(y),
+
+            "decision_threshold": threshold,
+
+            "roc_auc": m["roc_auc"],
+            "average_precision":
+                m["average_precision"],
+
+            "mcc": m["mcc"],
+            "balanced_accuracy":
+                m["balanced_accuracy"],
+
+            "sensitivity":
+                m["sensitivity"],
+
+            "ppv": m["ppv"],
+            "f1": m["f1"],
+            "accuracy": m["accuracy"],
+        })
+
+        print(
+            f"  {domain}: "
+            f"n={len(y):,}, "
+            f"ROC={m['roc_auc']:.4f}, "
+            f"PR={m['average_precision']:.4f}, "
+            f"MCC={m['mcc']:.4f}, "
+            f"F1={m['f1']:.4f}, "
+            f"thr={threshold:.4f}"
+        )
+
+
+    del model
+
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+
+
+    # Save after EACH completed checkpoint
+    new_rows = pd.DataFrame(
+        checkpoint_rows
+    )
+
+    progress = pd.concat(
+        [progress, new_rows],
+        ignore_index=True
+    )
+
+    progress = (
+        progress
+        .drop_duplicates(
+            ["method", "seed", "domain"],
+            keep="last"
+        )
+        .sort_values(
+            ["method", "seed", "domain"]
+        )
+        .reset_index(drop=True)
+    )
+
+    progress.to_csv(
+        PROGRESS_PATH,
+        index=False
+    )
+
+    print(
+        f"Saved progress: "
+        f"{len(progress)}/80 domain rows"
+    )
+
+
+# ----------------------------------------------------------
+# Final 10-seed summary
+# ----------------------------------------------------------
+
+if len(progress) != 80:
+
+    print(
+        f"\nINCOMPLETE: "
+        f"{len(progress)}/80 domain rows."
+    )
+
+    print(
+        "If Colab disconnected, rerun the local-cache "
+        "cell and then rerun THIS SAME cell. "
+        "Completed checkpoints will be skipped."
+    )
+
+else:
+
+    summary = (
+        progress
+        .groupby(["method", "domain"])
+        .agg(
+            n_seeds=("seed", "nunique"),
+
+            n_records=("n_records", "min"),
+            n_patients=("n_patients", "min"),
+            n_windows=("n_windows", "mean"),
+
+            roc_auc_mean=("roc_auc", "mean"),
+            roc_auc_sd=("roc_auc", "std"),
+
+            pr_auc_mean=(
+                "average_precision",
+                "mean"
+            ),
+            pr_auc_sd=(
+                "average_precision",
+                "std"
+            ),
+
+            mcc_mean=("mcc", "mean"),
+            mcc_sd=("mcc", "std"),
+
+            f1_mean=("f1", "mean"),
+            f1_sd=("f1", "std"),
+
+            sensitivity_mean=(
+                "sensitivity",
+                "mean"
+            ),
+            sensitivity_sd=(
+                "sensitivity",
+                "std"
+            ),
+
+            ppv_mean=("ppv", "mean"),
+            ppv_sd=("ppv", "std"),
+        )
+        .reset_index()
+    )
+
+    assert (
+        summary["n_seeds"] == 10
+    ).all()
+
+    summary.to_csv(
+        root / "d1_canonical_10seed_summary.csv",
+        index=False
+    )
+
+    print(
+        "\nCANONICAL D1 — 10-SEED SUMMARY"
+    )
+
+    print(
+        summary.to_string(index=False)
+    )
+
+
+    for domain in ("PTB", "INCART"):
+
+        current = summary[
+            summary["domain"] == domain
+        ]
+
+        print(
+            f"\n{domain} D1 RANKINGS"
+        )
+
+        for metric in (
+            "roc_auc_mean",
+            "pr_auc_mean",
+            "mcc_mean",
+            "f1_mean",
+        ):
+
+            ranking = (
+                current
+                .sort_values(
+                    metric,
+                    ascending=False
+                )
+            )
+
+            print(
+                metric,
+                " > ".join(
+                    f"{r.method}="
+                    f"{getattr(r, metric):.4f}"
+                    for r
+                    in ranking.itertuples(
+                        index=False
+                    )
+                )
+            )
+
+    print(
+        "\nNo retraining, validation, checkpoint "
+        "selection, or threshold selection used D1."
+    )

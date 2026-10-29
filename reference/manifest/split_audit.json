@@ -1,0 +1,42 @@
+{
+  "INCART": {
+    "patient_overlap": {
+      "train_test": [],
+      "train_val": [],
+      "val_test": []
+    },
+    "patients": {
+      "test": 7,
+      "train": 19,
+      "val": 6
+    },
+    "records": {
+      "test": 16,
+      "train": 44,
+      "val": 15
+    },
+    "test_records_with_training_patient": []
+  },
+  "PTB": {
+    "patient_overlap": {
+      "train_test": [],
+      "train_val": [],
+      "val_test": []
+    },
+    "patients": {
+      "test": 1877,
+      "train": 14823,
+      "val": 1917
+    },
+    "records": {
+      "test": 2158,
+      "train": 17084,
+      "val": 2146
+    },
+    "test_records_with_training_patient": []
+  },
+  "ptb_mixed_norm_abnormal": 445,
+  "ptb_unknown_records": 411,
+  "split_policy": "patient42",
+  "unknown_policy": "exclude"
+}

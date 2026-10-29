@@ -1,0 +1,98 @@
+{
+  "base_config": {
+    "architecture": "manuscript_bn",
+    "batch_size": 64,
+    "beta1": 0.9,
+    "beta2": 0.999,
+    "clip": 1.0,
+    "epsilon": 1e-08,
+    "imbalance": "sampler_only",
+    "local_epochs": 1,
+    "lr": 0.001,
+    "method": "fedavg",
+    "mu": 0.001,
+    "phase": "report",
+    "rounds": 20,
+    "schedule": "sampled_epoch",
+    "seed": 0,
+    "selection": "macro_domain_auc",
+    "server_lr": 0.01,
+    "server_momentum": 0.9,
+    "split_policy": "patient42",
+    "steps_per_epoch": 50,
+    "train_tau": 0.05,
+    "unknown_policy": "exclude",
+    "weight_decay": 0.0001,
+    "weighting": "equal"
+  },
+  "boundary_extension": {
+    "added_fedadam_server_lr": [
+      3.0,
+      10.0
+    ],
+    "added_fedavgm_server_lr": [
+      3.0,
+      10.0
+    ],
+    "added_fedprox_mu": [
+      3.0,
+      10.0
+    ],
+    "reason": "Stage-1 optimum was at the upper boundary 1.0 for all three tuned parameters.",
+    "stage1_grid_id": "af9807a956b49a1368cde3bf16f3b587b2d260f0d3280634311aaea3767e8795"
+  },
+  "candidate_count_per_method": {
+    "fedadam": 6,
+    "fedavgm": 6,
+    "fedprox": 8
+  },
+  "checkpoint_selection": "best round by validation macro-domain AUC within each run",
+  "code_hash": "0b9f67ac5d30270b791053942be0ec09af31fafe6da585af5b9d4b5620a27cf1",
+  "data_id": "9d68265b9e8940c9c1b1",
+  "epsilon_sensitivity": {
+    "added_epsilon": 0.001,
+    "baseline_epsilon": 1e-08,
+    "reference": "Reddi et al. FedOpt sensitivity setting around tau=1e-3",
+    "selection": "mean of best validation macro-domain AUC across matched tuning seeds",
+    "server_lr_grid": [
+      0.001,
+      0.01,
+      0.1,
+      1.0,
+      3.0,
+      10.0
+    ],
+    "test_data_used": false,
+    "tuning_seeds": [
+      101,
+      202,
+      303
+    ]
+  },
+  "fedadam": {
+    "epsilon": 0.001,
+    "lr": 0.001,
+    "mean_validation": 0.8893570019046318,
+    "server_lr": 1.0
+  },
+  "fedavgm": {
+    "lr": 0.001,
+    "mean_validation": 0.8712625240948543,
+    "server_lr": 3.0
+  },
+  "fedprox": {
+    "lr": 0.001,
+    "mean_validation": 0.8833257271821092,
+    "mu": 3.0
+  },
+  "fixed_rounds": 20,
+  "grid_id": "dd23a37aab39d53509bc9b4d82101fc4ad1fdb04d4fba3d434aa288d59806bca",
+  "joint_client_lr_grid": false,
+  "selection": "mean of best validation macro-domain AUC across tuning seeds",
+  "test_data_used": false,
+  "tuning_seeds": [
+    101,
+    202,
+    303
+  ]
+}

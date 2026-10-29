@@ -1,0 +1,220 @@
+# Priority #11 — canonical INCART tau-sensitivity
+# Fixed model predictions; only held-out INCART test labels are regenerated.
+
+from pathlib import Path
+import os
+import numpy as np
+import pandas as pd
+from sklearn.metrics import cohen_kappa_score
+
+from ecg_revision.data import Store
+from ecg_revision.evaluation import eval_directory
+from ecg_revision.training import predict
+from ecg_revision.metrics import scores
+
+base_dir = Path(BASE_DIR)
+root = base_dir / "study"
+fast = "/content/ecg_fl_revision_fast_cache"
+
+TAUS = (0.01, 0.05, 0.10, 0.20, 0.30, 0.50)
+
+store = Store(
+    base_dir / "data",
+    legacy_root=LEGACY_ROOT,
+    split_policy="patient42",
+    unknown_policy="exclude",
+)
+
+primary_path = root / "primary_canonical_runs.csv"
+if not primary_path.exists():
+    raise ValueError("Canonical primary runs are missing.")
+
+primary = pd.read_csv(primary_path)
+
+# Guard: canonical primary = 4 methods x 10 seeds
+assert len(primary) == 40
+assert set(primary["seed"]) == set(range(10))
+assert set(primary["method"]) == {
+    "fedavg", "fedavgm", "fedprox", "fedadam"
+}
+
+pack = store.pack("test", fast)
+view05 = pack.view(tau=0.05)
+
+incart_mask = view05.frame["domain"].to_numpy() == "INCART"
+incart_frame = view05.frame.loc[incart_mask].reset_index(drop=True)
+
+# ------------------------------------------------------------
+# Label sensitivity itself (independent of optimizer)
+# ------------------------------------------------------------
+
+y05 = pack.view(tau=0.05).y[incart_mask]
+
+label_rows = []
+
+for tau in TAUS:
+    y = pack.view(tau=tau).y[incart_mask]
+
+    label_rows.append({
+        "eval_tau": tau,
+        "n_windows": len(y),
+        "positive": int(y.sum()),
+        "negative": int(len(y) - y.sum()),
+        "prevalence": float(y.mean()),
+        "changed_vs_005": int(np.count_nonzero(y != y05)),
+        "changed_pct_vs_005": 100.0 * np.mean(y != y05),
+        "kappa_vs_005": float(cohen_kappa_score(y05, y)),
+    })
+
+label_summary = pd.DataFrame(label_rows)
+label_summary.to_csv(
+    root / "tau_sensitivity_canonical_labels.csv",
+    index=False
+)
+
+# ------------------------------------------------------------
+# Fixed-prediction performance sensitivity
+# ------------------------------------------------------------
+
+metric_rows = []
+
+for row in primary.itertuples(index=False):
+
+    checkpoint = Path(row.run_path) / "best.pt"
+
+    ckpt, eval_path = eval_directory(
+        checkpoint,
+        store,
+        root
+    )
+
+    pred_path = eval_path / "d2_probabilities.npy"
+
+    if pred_path.exists():
+        probabilities = np.load(pred_path)
+    else:
+        # Fallback only if cached canonical predictions are absent.
+        probabilities = predict(
+            ckpt["state"],
+            view05,
+            ckpt["config"]["architecture"]
+        )
+        np.save(pred_path, probabilities)
+
+    if len(probabilities) != len(view05):
+        raise ValueError("Cached prediction length mismatch.")
+
+    incart_prob = probabilities[incart_mask]
+
+    for tau in TAUS:
+        y = pack.view(tau=tau).y[incart_mask]
+
+        m = scores(y, incart_prob)
+
+        metric_rows.append({
+            "method": row.method,
+            "seed": int(row.seed),
+            "eval_tau": tau,
+            "n_windows": len(y),
+            "positive": int(y.sum()),
+            "prevalence": float(y.mean()),
+            **m,
+        })
+
+metrics = pd.DataFrame(metric_rows)
+
+metrics.to_csv(
+    root / "tau_sensitivity_canonical_rows.csv",
+    index=False
+)
+
+summary = (
+    metrics
+    .groupby(["method", "eval_tau"])
+    .agg(
+        n_seeds=("seed", "nunique"),
+
+        roc_auc_mean=("roc_auc", "mean"),
+        roc_auc_sd=("roc_auc", "std"),
+
+        pr_auc_mean=("average_precision", "mean"),
+        pr_auc_sd=("average_precision", "std"),
+
+        mcc_mean=("mcc", "mean"),
+        mcc_sd=("mcc", "std"),
+
+        f1_mean=("f1", "mean"),
+        f1_sd=("f1", "std"),
+
+        sensitivity_mean=("sensitivity", "mean"),
+        sensitivity_sd=("sensitivity", "std"),
+
+        ppv_mean=("ppv", "mean"),
+        ppv_sd=("ppv", "std"),
+    )
+    .reset_index()
+)
+
+assert (summary["n_seeds"] == 10).all()
+
+summary.to_csv(
+    root / "tau_sensitivity_canonical_summary.csv",
+    index=False
+)
+
+print("\nINCART LABEL SENSITIVITY")
+print(label_summary.to_string(index=False))
+
+print("\nCANONICAL 10-SEED TAU-SENSITIVITY")
+print(summary.to_string(index=False))
+
+print("\nRANKINGS BY TAU")
+
+for tau in TAUS:
+    current = summary[np.isclose(summary["eval_tau"], tau)]
+
+    print(f"\ntau={tau:g}")
+
+    for metric in (
+        "roc_auc_mean",
+        "pr_auc_mean",
+        "mcc_mean",
+        "f1_mean",
+    ):
+        ranking = (
+            current
+            .sort_values(metric, ascending=False)
+            [["method", metric]]
+        )
+
+        print(
+            metric,
+            " > ".join(
+                f"{r.method}={getattr(r, metric):.4f}"
+                for r in ranking.itertuples(index=False)
+            )
+        )
+
+print("\nMAXIMUM RANGE ACROSS TAU")
+
+for method in sorted(summary["method"].unique()):
+    current = summary[summary["method"] == method]
+
+    print(f"\n{method}")
+
+    for metric in (
+        "roc_auc_mean",
+        "pr_auc_mean",
+        "mcc_mean",
+        "f1_mean",
+    ):
+        values = current[metric]
+        print(
+            f"  {metric}: "
+            f"{values.max() - values.min():.4f}"
+        )
+
+print(
+    "\nNo retraining or model selection was performed. "
+    "Predictions were fixed; only held-out INCART test labels changed."
+)

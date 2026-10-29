@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+[project]
+name = "ecg-fl-repro"
+version = "0.1.0"
+description = "Source-traced reproduction of cross-dataset ECG federated experiments"
+[tool.setuptools]
+packages = ["ecg_revision"]
+[project.scripts]
+ecg-fl = "ecg_revision.cli:main"
+[tool.pytest.ini_options]
+pythonpath = ["."]

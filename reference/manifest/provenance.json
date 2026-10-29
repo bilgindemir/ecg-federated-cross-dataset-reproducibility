@@ -1,0 +1,37 @@
+{
+  "aami": {
+    "/": "Q",
+    "A": "S",
+    "E": "V",
+    "F": "F",
+    "J": "S",
+    "L": "N",
+    "N": "N",
+    "P": "Q",
+    "Q": "Q",
+    "R": "N",
+    "S": "S",
+    "V": "V",
+    "a": "S",
+    "e": "N",
+    "f": "Q",
+    "j": "N"
+  },
+  "data_id": "9d68265b9e8940c9c1b1",
+  "fs": 200,
+  "metadata_sha256": {
+    "incart_patients.txt": "7710993dd08ac1ee6e3912756b78cc16e9df40d14e5fb768c3c42a5197c79c17",
+    "ptbxl_database.csv": "7600de9c1b27d181d850b3c6038a35d7c3ddb6bb33b702e3a20252a6859d216b",
+    "scp_statements.csv": "ad05b0b1fcae83bb1230755ad9cfc7c96f303feddc08a4a9ad5bdc9ca63bac8f"
+  },
+  "min_beats": 3,
+  "preprocessing": "native-butter4-filtfilt-pchip-zscore-float32-canonical-leads",
+  "source_urls": [
+    "https://physionet.org/files/ptb-xl/1.0.3/",
+    "https://physionet.org/files/incartdb/1.0.0/"
+  ],
+  "stride": 512,
+  "unknown_policy": "exclude",
+  "version": "ecg-revision-2026-09-14-v2",
+  "win": 1024
+}
