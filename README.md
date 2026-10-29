@@ -1,16 +1,14 @@
-# ECG classification under cross-dataset heterogeneity
+# Federated Learning for ECG Classification Under Cross-Dataset Heterogeneity
 
-Reproducibility package for **“A Comparative Study of Federated Learning Methods for ECG Classification Under Cross-Dataset Heterogeneity”**, supplied IEEE Access manuscript by B. Demir, E. Domazet, M. Gusev, D. Mechkaroska, and A. Hasan.
+Official reproducibility repository accompanying the manuscript **“A Comparative Study of Federated Learning Methods for ECG Classification Under Cross-Dataset Heterogeneity”** by B. Demir, E. Domazet, M. Gusev, D. Mechkaroska, and A. Hasan, prepared for IEEE Access.
 
-**Status:** the canonical D2 implementation and saved result provenance have been recovered and checked. This is a source-traced refactor, not a newly completed replication. Full public-dataset preprocessing and 40-run GPU retraining were not executed during repository preparation. D1 sampling and historical systems timing have unresolved source/manuscript discrepancies; see [open issues](docs/OPEN_ISSUES.md). No missing results, infrastructure, or dependency versions have been invented.
+This repository provides a common experimental framework for comparing FedAvg, FedAvgM, FedProx, and FedAdam on binary ECG classification using PTB-XL and INCART. It includes preprocessing, patient-disjoint dataset construction, model training, evaluation, supplementary analyses, and reference results.
 
-## What was recovered
+The primary protocol comprises four logical clients, 20 communication rounds, and 10 matched random seeds. Three clients represent disjoint PTB-XL training folds; the fourth represents the INCART training partition. Checkpoint selection uses validation data exclusively.
 
-The eleven `ecg_revision/*.py` modules embedded in `Untitled23.ipynb` produce the aggregate source fingerprint `0b9f67ac5d30270b791053942be0ec09af31fafe6da585af5b9d4b5620a27cf1`, exactly matching all 40 canonical run configurations. The additional `Untitled23 (1).ipynb` has identical cell sources. Notebook dates/names alone were not used to decide authority.
+## Reproducibility status
 
-The portable code below separates the recovered signal processing, dataset construction, CNN, training, and metrics from new command-line orchestration. The refactor has its own code fingerprints and run IDs. It does not impersonate the original execution environment or silently resume original runs. Originals and historical materials are preserved in the separate `original-sources` archive, not imported by this package.
-
-See [source audit](docs/SOURCE_AUDIT.md), [protocol traceability](docs/TRACEABILITY.md), and [validation report](docs/VALIDATION.md).
+The repository includes automated implementation tests and verification of the reference results. A complete independent GPU rerun has not yet been completed. The dense-evaluation sampling discrepancy and unavailable multi-region deployment artifacts are described in the relevant sections below and in [reproducibility limitations](docs/OPEN_ISSUES.md).
 
 ## Repository layout
 
@@ -23,15 +21,15 @@ ecg_revision/
   metrics.py          ROC-AUC, average precision, confusion-derived metrics
   experiments.py      Explicit configuration expansion
   evaluation.py       D2 evaluation, validation thresholds, label sensitivity
-  dense.py            Recovered D1 algorithm, with explicit conflict guard
+  dense.py            Dense test-time segmentation analysis
   privacy.py          INCART patient-level membership/control analysis
   cli.py              Portable commands
 configs/              Canonical and supplementary experiment specifications
 manifests/            Fixed 75-record INCART patient/split assignment
-reference/            Original saved tables, protocols, 40 configs and histories
-provenance/           File/cell inventories, source links and hashes
+reference/            Reference tables, protocols, configurations and histories
+provenance/           Experiment provenance and integrity records
 scripts/              Reference verification and timing-summary commands
-tests/                Synthetic safeguards; never manuscript results
+tests/                Automated implementation and protocol tests
 ```
 
 ## Dataset acquisition
@@ -81,13 +79,13 @@ work/
 
 For an existing download, place the files at the paths above before running `prepare`; non-empty files are reused. Keep PTB relative paths from `filename_hr`. A complete existing dataset extraction can also be linked into this layout. Do not substitute PTB `records100`, previously windowed caches, or old INCART train/test arrays. Use a fresh `--root` for a different protocol or code revision.
 
-The source preprocessing order is: reorder leads to I, II, III, aVR, aVL, aVF, V1–V6; fourth-order Butterworth 0.5–40 Hz filtering at the native sampling rate using `filtfilt`; PCHIP interpolation to 200 Hz; per-lead, full-record z-score with denominator `std + 1e-8`; then 1,024-sample windows at stride 512. Trailing partial windows are dropped. Float32 casts and beat-index rounding follow the recovered code.
+Preprocessing proceeds as follows: reorder leads to I, II, III, aVR, aVL, aVF, V1–V6; fourth-order Butterworth 0.5–40 Hz filtering at the native sampling rate using `filtfilt`; PCHIP interpolation to 200 Hz; per-lead, full-record z-score with denominator `std + 1e-8`; then 1,024-sample windows at stride 512. Trailing partial windows are dropped. Signals are represented as float32 arrays; resampled beat indices use nearest-integer rounding.
 
 PTB labels: NORM-only maps to 0; any mapped non-NORM diagnostic superclass maps to 1; records without a mapped diagnostic superclass are excluded. The mapped cohort retains 21,388 recordings (411 exclusions). INCART labels use mapped AAMI-style beat groups: N/L/R/e/j are normal; S/V/F/Q groups are abnormal. Windows require at least three mapped beats and are positive when abnormal/total is **at least 0.05**. Beats fall in half-open `[start, start+1024)` windows. This is an operational binary target, not equivalent clinical labeling between domains.
 
 ## Installation and recorded environment
 
-Create an isolated Python environment and install a hardware-appropriate PyTorch build following [official PyTorch installation instructions](https://pytorch.org/get-started/locally/). The source reused Colab's PyTorch installation; no complete historical lockfile was supplied.
+Create an isolated Python environment and install a hardware-appropriate PyTorch build following [official PyTorch installation instructions](https://pytorch.org/get-started/locally/). The experiments used the Colab PyTorch environment documented below. A complete environment lockfile is unavailable.
 
 ```bash
 python -m venv .venv
@@ -119,11 +117,11 @@ All 40 saved canonical configs report the same environment:
 | CPU count / PyTorch threads | 2 / 1 |
 | Platform | Linux 6.6.159+, x86_64, glibc 2.39 |
 
-These are observations from saved JSON, not a claim that a compatible historical wheel/image was independently retrieved. `requirements-observed.txt` records established scientific-package versions; `requirements.txt` retains the source setup's general dependency ranges and pins. Requests, tqdm, soundfile, driver version, complete `pip freeze`, RAM, and Colab image identifier were not recorded. CLI execution uses one PyTorch CPU thread. Different software/hardware may produce numerical differences despite seeded deterministic operations.
+`requirements-observed.txt` lists the scientific-package versions recorded for the canonical experiments. `requirements.txt` specifies installation dependencies. Availability of an identical Colab image has not been verified. Requests, tqdm, soundfile, driver version, complete `pip freeze`, RAM, and Colab image identifier were not recorded. CLI execution uses one PyTorch CPU thread. Different software/hardware may produce numerical differences despite seeded deterministic operations.
 
 ## Fixed patient-disjoint split
 
-[incart_patient_split.csv](manifests/incart_patient_split.csv) is recovered from the saved `records.csv` and verified against manuscript Table 18. It contains **record, source patient ID, and split**, not just a seed. The loader reads this file and checks it against the source patient mapping; it does not regenerate random splits on every run.
+[incart_patient_split.csv](manifests/incart_patient_split.csv) specifies the fixed assignment reported in manuscript Table 18. It contains **record, source patient ID, and split**, not just a seed. The loader reads this file and checks it against the source patient mapping; it does not regenerate random splits on every run.
 
 | Split | Patients | Recordings | Eligible D2 windows |
 |---|---:|---:|---:|
@@ -134,7 +132,7 @@ These are observations from saved JSON, not a claim that a compatible historical
 | PTB validation | official fold 9 | 2,146 | 4,292 |
 | PTB test | official fold 10 | 2,158 | 4,316 |
 
-Original INCART generation used sorted source patients and two `train_test_split` calls with random state 42: 60/40, then 50/50 of the held-out 40%. Patient groups and all their records stay together. PTB training folds form C0=1–3, C1=4–6, C2=7–8; C3 is INCART train. Client counts are 12,854, 12,788, 8,526, and 30,888 windows. Seven INCART validation candidate windows fail the minimum-beat rule. Splits do not change with experiment seeds.
+The INCART split was constructed using sorted source patients and two `train_test_split` calls with random state 42: 60/40, then 50/50 of the held-out 40%. Patient groups and all their records stay together. PTB training folds form C0=1–3, C1=4–6, C2=7–8; C3 is INCART train. Client counts are 12,854, 12,788, 8,526, and 30,888 windows. Seven INCART validation candidate windows fail the minimum-beat rule. Splits do not change with experiment seeds.
 
 ## Canonical 10-seed experiment
 
@@ -158,7 +156,7 @@ The network has channels 32/64/128, kernels 7/5/3 with padding `kernel//2`, Batc
 | FedProx | μ=3.0; local penalty μ/2 × squared distance from global parameters |
 | FedAdam | server lr 1.0; β1=0.9; β2=0.999; ε=0.001; bias-corrected moments |
 
-Floating BatchNorm buffers use the same averaging weights; integer batch counters use the maximum. Server momentum/Adam updates apply to trainable parameters, while buffers take their aggregated values. The FedAdam variant uses global-minus-client-average pseudo-gradients and bias correction, preserving the source convention.
+Floating BatchNorm buffers use the same averaging weights; integer batch counters use the maximum. Server momentum/Adam updates apply to trainable parameters, while buffers take their aggregated values. The FedAdam variant uses global-minus-client-average pseudo-gradients and bias correction, as implemented in this study.
 
 After every round, the unweighted mean of PTB and INCART validation ROC-AUC selects the checkpoint; exact ties retain the earliest round. Training does not load test partitions. Held-out evaluation is a separate command. Primary threshold metrics use 0.5; PR-AUC is implemented as `average_precision_score`, not trapezoidal integration. Results are summarized over seeds with sample SD (`ddof=1`); paired differences use seed-level t intervals.
 
@@ -177,7 +175,7 @@ python -m ecg_revision.cli train --config configs/epsilon.json --root work
 python -m ecg_revision.cli summarize --config configs/epsilon.json --root work
 ```
 
-Tuning seeds are 101, 202, 303. The merged final grid is μ={0,0.0001,0.001,0.01,0.1,1,3,10}; FedAvgM/FedAdam server lr={0.001,0.01,0.1,1,3,10}. Initial FedAdam ε=1e-8. The saved epsilon experiment crossed both 1e-8 and 0.001 with **all six** server rates (36 rows), although manuscript prose emphasizes the comparison at lr=1.0. The canonical config freezes the recorded selections; these commands do not automatically replace it using new outcomes. Grid summaries use mean best validation AUC across tuning seeds, never test scores.
+Tuning seeds are 101, 202, 303. The hyperparameter grid is μ={0,0.0001,0.001,0.01,0.1,1,3,10}; FedAvgM/FedAdam server lr={0.001,0.01,0.1,1,3,10}. Initial FedAdam ε=1e-8. The epsilon analysis evaluates both 1e-8 and 0.001 with **all six** server rates (36 rows), although manuscript prose emphasizes the comparison at lr=1.0. The canonical configuration fixes the selected hyperparameters; these commands do not automatically replace it using new outcomes. Grid summaries use mean best validation AUC across tuning seeds, never test scores.
 
 ### Local computation and aggregation weighting
 
@@ -213,11 +211,13 @@ Decision thresholds maximize validation MCC separately for each model/domain. Ti
 ### Dense D1 sensitivity: unresolved sampling discrepancy
 
 ```bash
-# Run thresholds first. This explicitly selects the recovered source behavior.
+# Run the validation-threshold analysis before dense evaluation.
 python -m ecg_revision.cli dense --config configs/canonical.json --root work --acknowledge-source-d1
 ```
 
-Without the acknowledgement flag this command refuses to run. PTB is exhaustive stride one: 2,108,366 windows. INCART includes all 16 test recordings and 16,384 candidate starts per record, but the supplied code forces all D2 starts into the sample and seeds by a hash of the record ID. The manuscript instead states a fresh seed-42 RNG sampling from all candidates per recording. No seed-42 replacement has been fabricated. The source-mode command uses D2 validation thresholds unchanged, and outputs explicitly named `*_dense_source_protocol.csv`; it must not be represented as resolving the manuscript conflict. Saved D1 tables are supplied as references with this qualification.
+PTB-XL is evaluated exhaustively at stride one, yielding 2,108,366 windows. INCART evaluation includes all 16 test recordings, with 16,384 candidate start positions per recording. D2 validation-selected decision thresholds are reused unchanged.
+
+**Sampling limitation:** the current implementation includes all stride-512 starts and samples additional positions using a record-ID-derived seed. The manuscript describes seed-42 sampling from all candidate positions. This difference remains unresolved. The command therefore requires explicit acknowledgement and writes `*_dense_source_protocol.csv`. These outputs should be interpreted according to the implemented sampling rule; they do not establish replication of the manuscript's stated sampling procedure.
 
 ### Patient-level membership-inference audit
 
@@ -225,7 +225,7 @@ Without the acknowledgement flag this command refuses to run. PTB is exhaustive 
 python -m ecg_revision.cli privacy --config configs/canonical.json --root work
 ```
 
-For each canonical checkpoint: compute INCART stride-512 loss; average within recording, then equally across a patient's recordings; negate this loss as the membership score. Compare exposed training patients against test patients and validation against test as a distribution-shift control. The latter groups are both unseen during training. No low-FPR claim or formal privacy guarantee is produced. The source's record-equal patient averaging is documented because it is more specific than the manuscript's “all windows” wording.
+For each canonical checkpoint: compute INCART stride-512 loss; average within recording, then equally across a patient's recordings; negate this loss as the membership score. Compare exposed training patients against test patients and validation against test as a distribution-shift control. The latter groups are both unseen during training. No low-FPR claim or formal privacy guarantee is produced. Each recording contributes equally to its patient-level loss score.
 
 ### Systems timing
 
@@ -233,11 +233,13 @@ For each canonical checkpoint: compute INCART stride-512 loss; average within re
 python scripts/summarize_timing.py --root work
 ```
 
-This summarizes local histories from the canonical/pooled commands and computes `sum(max(client_train_s)+aggregation_s)` as a parallel lower bound. It cannot reproduce the manuscript's specific historical timing values or multi-region Flower deployment. **There is no verified deployment/reproduction command for that experiment:** the actual Flower server/client scripts, full timing logs, package lock, and infrastructure definition were not recovered. The notebook's SSH utility is a different transport and is excluded from the executable protocol. No cloud resources are created.
+This command summarizes local execution histories and calculates `sum(max(client_train_s) + aggregation_s)` as an idealized synchronous parallel lower bound. Evaluation, network communication, and coordination overhead are excluded from that lower bound.
+
+The multi-region Flower deployment is not executable from this release: deployment scripts, complete timing logs, an environment lockfile, and infrastructure definitions are unavailable. The reported distributed timing results are provided as manuscript context rather than expected runtimes for this package.
 
 ## Principal reference results
 
-Values below are recalculated from saved canonical rows; mean ± sample SD, threshold 0.5. These are original reported outputs, not results generated by this packaging task.
+Reference results are summarized over 10 matched seeds as mean ± sample standard deviation. Threshold-dependent metrics use the fixed threshold of 0.5.
 
 | Method | Domain | ROC-AUC | Average precision | MCC |
 |---|---|---|---|---|
@@ -260,8 +262,16 @@ Recorded canonical execution used a Tesla T4, two CPU cores and one PyTorch thre
 
 D2 alone contains 95,419 float32 windows × 12 × 1,024, or **4,690,034,688 bytes (~4.37 GiB)** of waveform payload (calculated, excluding NPY headers, metadata, raw files, full-record processed arrays, temporary files and checkpoints). Processing both sources also retains full-record arrays; allow additional disk space. D1 is streamed in batches of 256 rather than materializing all windows. Canonical training consists of 800 rounds / 3,200 client local epochs. Expanded sweeps, baselines, D1, and privacy add substantial work. CPU execution is supported but no wall-time prediction is established.
 
-Manuscript historical timing: centralized five epochs 191.23 s, sequential FL 20 rounds 639.67 s, calculated parallel lower bound 182.88 s. Multi-region timing reports CPU clients with 2 vCPU/8 GB and a 2 vCPU/4 GB server, three 20-round runs averaging 2011.64 ± 38.27 s. These values are manuscript claims with incomplete recovered provenance; they must not be treated as expected timings for the recovered canonical GPU pipeline or used for cross-hardware speedup claims.
+Manuscript historical timing: centralized five epochs 191.23 s, sequential FL 20 rounds 639.67 s, calculated parallel lower bound 182.88 s. Multi-region timing reports CPU clients with 2 vCPU/8 GB and a 2 vCPU/4 GB server, three 20-round runs averaging 2011.64 ± 38.27 s. These measurements use distinct execution protocols and hardware; they are not runtime targets for this package and should not be used to calculate cross-hardware speedups.
 
-## Release notes and licensing
+## Citation and licensing
 
-No license or DOI has been invented. Confirm code redistribution rights and select a license before public release. The manuscript contains a placeholder DOI, which is not used as a real citation identifier. Dataset licensing remains with the providers. Original sources were not overwritten. This repository is suitable for methodological review and canonical reproduction attempts; resolving the documented D1 and timing gaps is necessary before claiming complete reproduction of every manuscript analysis.
+When using this repository, cite the accompanying manuscript and the dataset publications linked above. Publication details and a persistent repository release identifier will be added when available.
+
+A code license has not yet been specified. Dataset use remains subject to the respective PhysioNet license and citation requirements.
+
+## Validation and limitations
+
+Implementation checks cover split integrity, window labeling, model structure, aggregation, threshold selection, and deterministic round-boundary resume. Reference verification checks all 40 canonical runs, 800 round histories, and 80 held-out domain evaluations. See [validation details](docs/VALIDATION.md).
+
+The current validation does not constitute a complete independent rerun of all experiments. Consult [reproducibility limitations](docs/OPEN_ISSUES.md) before interpreting dense-evaluation or systems-timing comparisons.
