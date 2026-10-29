@@ -1,6 +1,6 @@
 # Federated Learning for ECG Classification Under Cross-Dataset Heterogeneity
 
-Official reproducibility repository accompanying the manuscript **“A Comparative Study of Federated Learning Methods for ECG Classification Under Cross-Dataset Heterogeneity”** by B. Demir, E. Domazet, M. Gusev, D. Mechkaroska, and A. Hasan, prepared for IEEE Access.
+Reproducibility repository accompanying the manuscript **“A Comparative Study of Federated Learning Methods for ECG Classification Under Cross-Dataset Heterogeneity”** by B. Demir, E. Domazet, M. Gusev, D. Mechkaroska, and A. Hasan, prepared for IEEE Access.
 
 This repository provides a common experimental framework for comparing FedAvg, FedAvgM, FedProx, and FedAdam on binary ECG classification using PTB-XL and INCART. It includes preprocessing, patient-disjoint dataset construction, model training, evaluation, supplementary analyses, and reference results.
 
@@ -27,7 +27,7 @@ ecg_revision/
 configs/              Canonical and supplementary experiment specifications
 manifests/            Fixed 75-record INCART patient/split assignment
 reference/            Reference tables, protocols, configurations and histories
-provenance/           Experiment provenance and integrity records
+provenance/           Implementation-test and reference-verification reports
 scripts/              Reference verification and timing-summary commands
 tests/                Automated implementation and protocol tests
 ```

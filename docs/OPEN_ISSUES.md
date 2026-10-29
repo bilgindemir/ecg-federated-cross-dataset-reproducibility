@@ -1,27 +1,37 @@
-# Evidence gaps and manuscript conflicts
+# Reproducibility limitations
 
-These are release limitations, not silently repaired experimental choices.
+## Dense test-time sampling
 
-1. **D1 sampling conflict (material).** Manuscript p.6 describes seed 42 reset for each record and random sampling without replacement from all stride-one candidates. `Untitled23.ipynb` cell 13 `dense_starts` instead seeds with `int(fingerprint(rid)[:8],16)`, includes all D2 starts, and samples the remainder; final cell 30 imports that function. Both notebook copies contain the same code. Saved D1 summary tables do not record selected starts or a sampling fingerprint, so they cannot adjudicate the conflict. The executable source-mode analysis is explicitly guarded and named; a manuscript-exact seed-42 implementation has not been passed off as recovered code. Resolve by recovering executed code/start manifests or correcting the manuscript and rerunning if necessary.
+The manuscript describes an RNG initialized with seed 42 for each INCART recording, sampling without replacement from all valid stride-one start positions. The implementation in `ecg_revision/dense.py` includes all stride-512 starts and samples additional positions using a record-ID-derived seed. Reference D1 tables do not include the selected start positions needed to resolve this difference.
 
-2. **Distributed Flower timing is not recovered.** Manuscript describes Flower and five GCP CPU VMs. The revision notebook embeds a persistent-SSH transport, not Flower. The Drive `distributed_comment16` folder contains client arrays/manifest, not the Flower deployment scripts or complete three-run timing logs. No Terraform, Docker image, firewall setup, region provisioning commands or versions have been invented. The SSH utility is preserved only in the separate originals archive. The seven attachment sources and research-folder inventory do not establish the exact historical Flower executable.
+Dense evaluation therefore requires `--acknowledge-source-d1`. Results should be interpreted according to the implemented D2-inclusive sampling rule. The sampling procedure must be reconciled before claiming exact reproduction of the manuscript's D1 protocol.
 
-3. **Historical timing provenance unresolved.** Table 15's 191.23/639.67/182.88 seconds cannot be linked to a complete recovered canonical timing invocation. The new timing summarizer distinguishes round time excluding checkpoint I/O from a parallel training lower bound. It does not call either a replication of Table 15. Recorded canonical histories permit new summaries but are not proof of the historical table's exact protocol.
+## Multi-region systems timing
 
-4. **Epsilon sweep reporting is narrower than saved execution.** Manuscript emphasizes ε=0.001 at server lr=1; saved `tuning_fedadam_epsilon_runs.csv` and notebook cell 22 cover both epsilons across all six rates (36 rows). Config preserves the recovered executed grid. Document that broader search in the manuscript if it informed selection.
+The multi-region Flower server/client deployment, complete timing logs, environment lockfile, and infrastructure definitions are unavailable in this release. The local timing summarizer reports execution-history measurements and an idealized parallel lower bound. It does not reproduce the manuscript's multi-region deployment or establish equivalent runtime on different hardware.
 
-5. **Patient-loss averaging wording.** Final privacy cell first averages window loss per recording and then averages recordings equally within each patient. This is not necessarily identical to pooling every patient's windows, especially where windows are excluded. The repository preserves recording-equal averaging and states it explicitly.
+## Hyperparameter search scope
 
-6. **Per-round test access is internally inconsistent in manuscript prose.** One paragraph says tests were evaluated every round for curves; canonical `training.run` loads only train and validation packs, while final evaluation is separate. Repository preserves the recovered validation-only selection/training behavior. Figure 2 can be rebuilt from validation histories; per-round test predictions were not recovered.
+The epsilon sensitivity configuration evaluates two epsilon values across six server learning rates and three tuning seeds (36 runs). The manuscript discussion emphasizes the comparison at server learning rate 1.0. Interpret selection in the context of the full configured search.
 
-7. **Dependency information is observational, not a complete lock.** All 40 canonical config JSONs agree on Python 3.13.16, PyTorch 2.11.0+cu130 and the listed scientific versions. These saved values were not independently verified against a retrievable historical Colab image. Full transitive dependencies, GPU driver, RAM and memory peaks remain unknown. CPU validation during packaging uses a different environment, recorded separately.
+## Patient-level privacy score
 
-8. **Full numerical rerun remains outstanding.** Synthetic tests, source parity, metadata/split reconstruction and saved-result verification pass. No full waveform download, 40-run training, D1 inference or patient-level privacy rerun was completed here. Original checkpoints are inventoried in Drive but not bundled or byte-validated; the 40 configs, completion JSONs and histories are included. Do not interpret saved reference outputs as freshly reproduced results.
+The membership-inference audit averages window losses within each recording and then averages recordings equally within each patient. This recording-equal score can differ from pooling all windows belonging to a patient. The validation-versus-test control is reported separately from the training-versus-test comparison; neither provides a formal privacy guarantee.
 
-9. **Inventory is bounded for bulk waveform/cache directories.** 53,418 Drive entries were observed. The connector lists at most 1,000 children per folder; 49 raw/processed/cache directories reached that bound. Their unlisted tail is not represented as inventoried or inspected. All observed study run folders and study-level result/protocol files were enumerated; raw/cache directory limits are listed explicitly in `provenance/inventory_limits.json`. An exported full Drive file listing is needed to claim an exhaustive inventory of every waveform/cache file.
+## Evaluation schedule
 
-10. **Baseline table rounding.** The saved pooled INCART ROC-AUC mean is 0.844704..., while Table 7 prints 0.844. Other pooled entries also appear truncated relative to saved precision. Use saved numerical tables as reference; review manuscript rounding rather than changing data.
+Training loads only training and validation partitions. Test evaluation is performed separately after validation-based checkpoint selection. Per-round test predictions are not included. Validation histories support the reported round-wise validation curves.
 
-11. **Release identity/rights.** The supplied manuscript DOI is a placeholder. Code license and repository citation/release DOI were not established. No license grant, Zenodo DOI or publication status has been fabricated.
+## Environment and independent replication
 
-Confidence: high in canonical engine/source linkage and saved D2 results; limited for D1 protocol alignment and historical systems execution.
+Canonical run configurations record the scientific-package versions listed in the README. A complete transitive dependency lockfile, equivalent Colab image, GPU driver version, peak RAM, and peak GPU memory are unavailable. A complete independent public-dataset GPU rerun has not yet been completed. Implementation tests and reference-table checks are distinct from end-to-end experimental replication.
+
+Reference checkpoint payloads are not distributed with this release. Researchers can generate checkpoints using the documented training commands.
+
+## Numerical reporting
+
+Use full-precision reference CSVs when comparing results. The pooled INCART ROC-AUC mean is approximately 0.844704, whereas the manuscript table prints 0.844. This rounding difference should not be interpreted as a change in the underlying predictions.
+
+## Citation and license
+
+Final publication details, a persistent release identifier, and a code license have not yet been specified. Dataset licenses and citation requirements remain those of the respective providers.

@@ -1,4 +1,4 @@
-"""Recovered D1 computation. Manuscript sampling conflict must be acknowledged."""
+"""Dense test-time ECG segmentation. Manuscript sampling conflict must be acknowledged."""
 import numpy as np
 import pandas as pd
 import torch
@@ -10,7 +10,7 @@ from .evaluation import checked_checkpoint
 from .metrics import scores
 
 def dense_starts(length,rid,cap=None):
-    # Exact supplied engine rule; NOT manuscript's seed-42 rule.
+    # D2-inclusive sampling; see the documented manuscript sampling limitation.
     candidates=np.arange(max(0,length-WIN+1),dtype=np.int64)
     if cap is None or len(candidates)<=cap:return candidates
     d2=np.arange(0,length-WIN+1,STRIDE,dtype=np.int64)
@@ -22,7 +22,7 @@ def dense_starts(length,rid,cap=None):
 @torch.inference_mode()
 def evaluate(paths,store,threshold_table,output,acknowledge_source_sampling=False):
     if not acknowledge_source_sampling:
-        raise ValueError('Unresolved D1 sampling conflict: see docs/OPEN_ISSUES.md. Use --acknowledge-source-d1 only for the recovered source protocol.')
+        raise ValueError('Unresolved D1 sampling conflict: see docs/OPEN_ISSUES.md. Use --acknowledge-source-d1 only for the implemented sampling protocol.')
     rows=[];device=device_name()
     for path in paths:
         c=checked_checkpoint(path,store);cfg=c['config'];model=CNN(cfg['architecture']).to(device);model.load_state_dict(c['state']);model.eval()
@@ -41,7 +41,7 @@ def evaluate(paths,store,threshold_table,output,acknowledge_source_sampling=Fals
                     batch=starts[i:i+256];xb=torch.from_numpy(np.stack([x[:,int(s):int(s)+WIN] for s in batch])).to(device)
                     p[i:i+len(batch)]=model(xb).sigmoid().cpu().numpy()
                 ys.append(y);ps.append(p)
-            rows.append(dict(method=cfg['method'],seed=cfg['seed'],domain=domain,n_records=len(selected),n_patients=selected.patient.nunique(),sampling='recovered_source_hash_seed_D2_inclusive',**scores(np.concatenate(ys),np.concatenate(ps),threshold=threshold)))
+            rows.append(dict(method=cfg['method'],seed=cfg['seed'],domain=domain,n_records=len(selected),n_patients=selected.patient.nunique(),sampling='record_hash_seed_D2_inclusive',**scores(np.concatenate(ys),np.concatenate(ps),threshold=threshold)))
             pd.DataFrame(rows).to_csv(output,index=False)
         del model
     return pd.DataFrame(rows)

@@ -1,4 +1,4 @@
-"""INCART patient-level audit from final notebook cell 34."""
+"""INCART patient-level membership-inference and distribution-shift control."""
 import numpy as np
 import pandas as pd
 from sklearn.metrics import roc_auc_score
@@ -12,7 +12,7 @@ def patient_scores(view,p,scope,exposed):
         frame=frame[frame.rid.isin(exposed)]
     prob=np.clip(frame.p.to_numpy(dtype=float),1e-7,1-1e-7);y=frame.y.to_numpy()
     frame['loss']=-(y*np.log(prob)+(1-y)*np.log1p(-prob))
-    # Recovered code averages windows within recording, then recordings within patient.
+    # Average windows within each recording, then recordings within each patient.
     rec=frame.groupby(['patient','rid']).loss.mean().reset_index()
     return -rec.groupby('patient').loss.mean()
 

@@ -1,4 +1,4 @@
-# General dependency ranges recorded in source notebook setup; torch installed separately.
+# Runtime dependencies; install a hardware-appropriate PyTorch build separately.
 numpy>=1.26.4,<3
 scipy>=1.13,<2
 scikit-learn>=1.4,<2
