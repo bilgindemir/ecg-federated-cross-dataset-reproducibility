@@ -2,13 +2,13 @@
 
 ## Dense test-time sampling
 
-The manuscript describes an RNG initialized with seed 42 for each INCART recording, sampling without replacement from all valid stride-one start positions. The implementation in `ecg_revision/dense.py` includes all stride-512 starts and samples additional positions using a record-ID-derived seed. Reference D1 tables do not include the selected start positions needed to resolve this difference.
+The manuscript describes an RNG initialized with seed 42 for each INCART recording, sampling without replacement from all valid stride-one start positions. The evaluation program for the saved D1 rows calls a sampler that includes all stride-512 starts and samples additional positions using a recording-ID-derived seed. The maintained implementation in `ecg_revision/dense.py` uses the same rule. The reference rows lack the selected start positions and per-window predictions needed to verify the sampling history of resumed rows.
 
 Dense evaluation therefore requires `--acknowledge-source-d1`. Results should be interpreted according to the implemented D2-inclusive sampling rule. The sampling procedure must be reconciled before claiming exact reproduction of the manuscript's D1 protocol.
 
 ## Multi-region systems timing
 
-The multi-region Flower server/client deployment, complete timing logs, environment lockfile, and infrastructure definitions are unavailable in this release. The local timing summarizer reports execution-history measurements and an idealized parallel lower bound. It does not reproduce the manuscript's multi-region deployment or establish equivalent runtime on different hardware.
+The [original client-export manifest](../reference/timing/table16_client_manifest.csv) identifies the earlier 66,426-window partition by shard counts and SHA-256 hashes. The multi-region Flower server/client deployment, complete timing and interface-traffic logs, and environment definitions are unavailable. The local timing summarizer reports execution-history measurements and an idealized parallel lower bound. The [manuscript table index](TABLES.md) records the separate evidence for each timing table.
 
 ## Hyperparameter search scope
 

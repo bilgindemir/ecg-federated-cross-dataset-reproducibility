@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "Please cite the software release used in your analysis and the accompanying manuscript."
+title: "Federated Learning for ECG Classification Under Cross-Dataset Heterogeneity"
+type: software
+authors:
+  - family-names: Demir
+    given-names: Bilgin
+  - family-names: Domazet
+    given-names: Ervin
+  - family-names: Gusev
+    given-names: Marjan
+  - family-names: Mechkaroska
+    given-names: Daniela
+  - family-names: Hasan
+    given-names: Afan
+repository-code: "https://github.com/bilgindemir/ecg-federated-cross-dataset-reproducibility"

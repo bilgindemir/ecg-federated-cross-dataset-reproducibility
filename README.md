@@ -10,6 +10,8 @@ The primary protocol comprises four logical clients, 20 communication rounds, an
 
 The repository includes automated implementation tests and verification of the reference results. A complete independent GPU rerun has not yet been completed. The dense-evaluation sampling discrepancy and unavailable multi-region deployment artifacts are described in the relevant sections below and in [reproducibility limitations](docs/OPEN_ISSUES.md).
 
+The [manuscript table index](docs/TABLES.md) links each table to its configuration, command, or reference data. The [frozen canonical source snapshot](reference/source/canonical/ecg_revision) matches the source fingerprint recorded for all 40 primary runs.
+
 ## Repository layout
 
 ```text
@@ -121,7 +123,7 @@ All 40 saved canonical configs report the same environment:
 
 ## Fixed patient-disjoint split
 
-[incart_patient_split.csv](manifests/incart_patient_split.csv) specifies the fixed assignment reported in manuscript Table 18. It contains **record, source patient ID, and split**, not just a seed. The loader reads this file and checks it against the source patient mapping; it does not regenerate random splits on every run.
+[incart_patient_split.csv](manifests/incart_patient_split.csv) specifies the fixed assignment reported in manuscript Table 1. It contains **record, source patient ID, and split**. The loader reads this file and checks it against the source patient mapping.
 
 | Split | Patients | Recordings | Eligible D2 windows |
 |---|---:|---:|---:|
@@ -235,7 +237,7 @@ python scripts/summarize_timing.py --root work
 
 This command summarizes local execution histories and calculates `sum(max(client_train_s) + aggregation_s)` as an idealized synchronous parallel lower bound. Evaluation, network communication, and coordination overhead are excluded from that lower bound.
 
-The multi-region Flower deployment is not executable from this release: deployment scripts, complete timing logs, an environment lockfile, and infrastructure definitions are unavailable. The reported distributed timing results are provided as manuscript context rather than expected runtimes for this package.
+The historical multi-region Flower setup used four clients and 66,426 training windows, as documented by the [client-export manifest](reference/timing/table16_client_manifest.csv). The deployment scripts, complete timing logs, dependency versions, and infrastructure definitions are unavailable. See the [table index](docs/TABLES.md) for the scope of Tables 15 and 16 and the separate matched-work control.
 
 ## Additional robustness and calibration analyses
 
@@ -324,7 +326,7 @@ Reference results are summarized over 10 matched seeds as mean ± sample standar
 
 Pooled values and supplementary tables are in `reference/study/baseline_canonical_summary.csv` and the corresponding named CSVs. A manuscript rounding discrepancy exists for pooled INCART ROC-AUC: the table prints 0.844, whereas saved data/text give about 0.8447 (normally 0.845 at three decimals). Use full-precision saved values when checking.
 
-`python scripts/verify_reference.py` checks 40 configurations, 800 history rows, selected rounds, 80 domain rows, seed coverage and primary ROC-AUC rounding. To verify a new run, first compare the data ID, counts, configuration and selected-round traces, then compare seed-level metrics and summary distributions. No unsupported numerical tolerance or bitwise GPU reproducibility guarantee is asserted.
+`python scripts/verify_reference.py` checks the frozen source fingerprint, 40 configurations, 800 history rows, selected rounds, 80 domain rows, seed coverage and primary ROC-AUC rounding. To verify a new run, first compare the data ID, counts, configuration and selected-round traces, then compare seed-level metrics and summary distributions. No unsupported numerical tolerance or bitwise GPU reproducibility guarantee is asserted.
 
 ## Computational requirements
 
@@ -336,7 +338,7 @@ Manuscript historical timing: centralized five epochs 191.23 s, sequential FL 20
 
 ## Citation and licensing
 
-When using this repository, cite the accompanying manuscript and the dataset publications linked above. Publication details and a persistent repository release identifier will be added when available.
+When using this repository, cite the software version used, the accompanying manuscript, and the dataset publications linked above. See [CITATION.cff](CITATION.cff) for the software citation metadata.
 
 A code license has not yet been specified. Dataset use remains subject to the respective PhysioNet license and citation requirements.
 

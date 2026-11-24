@@ -1,12 +1,18 @@
 """Verify saved canonical coverage, settings, history selection, and summary statistics.
 Does not claim to rerun model training or validate checkpoint bytes.
 """
+from hashlib import sha256
 from pathlib import Path
 import json
 import numpy as np
 import pandas as pd
 ROOT=Path(__file__).resolve().parents[1]
 reference=ROOT/'reference'
+source = reference / 'source' / 'canonical' / 'ecg_revision'
+source_hashes = {path.name: sha256(path.read_bytes()).hexdigest() for path in sorted(source.glob('*.py'))}
+source_hash = sha256(json.dumps(source_hashes, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+protocol = json.loads((reference / 'study' / 'primary_canonical_protocol.json').read_text())
+assert source_hash == protocol['code_hash'], f'Frozen canonical source fingerprint mismatch: {source_hash}'
 rows=pd.read_csv(reference/'canonical_d2_rows.csv')
 runs=pd.read_csv(reference/'study/primary_canonical_runs.csv')
 assert len(rows)==80 and len(runs)==40
@@ -20,7 +26,7 @@ for row in runs.itertuples():
     assert cfg['architecture']=='manuscript_bn' and cfg['batch_size']==64
     assert cfg['split_policy']=='patient42' and cfg['unknown_policy']=='exclude'
     assert cfg['weighting']=='equal' and cfg['local_epochs']==1
-    assert cfg['environment']['code_hash']=='0b9f67ac5d30270b791053942be0ec09af31fafe6da585af5b9d4b5620a27cf1'
+    assert cfg['environment']['code_hash'] == source_hash
     best=max(history,key=lambda h:h['selection_score'])
     assert best['round']==done['best_round']==row.best_round
     assert np.isclose(best['selection_score'],row.best_validation)
@@ -31,4 +37,5 @@ expected={('fedavg','PTB'):(.911,.006),('fedavg','INCART'):(.776,.027),('fedavgm
 for key,pair in expected.items():
     assert tuple(summary.loc[key,'roc_auc'].round(3))==pair
 print('PASS: 40 complete canonical runs; 800 round histories; 80 held-out domain rows; rounded manuscript ROC-AUC values match.')
+print(f'PASS: frozen canonical source matches the code fingerprint recorded for all 40 runs ({source_hash}).')
 print(summary.to_string())
