@@ -1,0 +1,5 @@
+method,train_test_auc,train_test_seed_sd,train_test_patient_ci_low,train_test_patient_ci_high,train_test_exact_p_greater,train_test_exact_p_two_sided,train_test_permutations,val_test_auc,val_test_seed_sd,val_test_patient_ci_low,val_test_patient_ci_high,val_test_exact_p_two_sided,val_test_permutations
+fedavg,0.599248,0.071685,0.403008,0.781955,0.207019,0.414141,657800,0.421429,0.055043,0.17381,0.7,0.60373,1716
+fedavgm,0.615038,0.111511,0.38797,0.821805,0.162641,0.325491,657800,0.338095,0.095766,0.090476,0.621429,0.297203,1716
+fedprox,0.528571,0.028806,0.311278,0.742857,0.412717,0.825026,657800,0.357143,0.070093,0.078571,0.671429,0.37296,1716
+fedadam,0.696992,0.145495,0.58344,0.793233,0.002733,0.005307,657800,0.652381,0.208535,0.502381,0.771429,0.098485,1716

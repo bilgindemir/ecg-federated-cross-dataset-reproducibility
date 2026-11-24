@@ -237,6 +237,76 @@ This command summarizes local execution histories and calculates `sum(max(client
 
 The multi-region Flower deployment is not executable from this release: deployment scripts, complete timing logs, an environment lockfile, and infrastructure definitions are unavailable. The reported distributed timing results are provided as manuscript context rather than expected runtimes for this package.
 
+## Additional robustness and calibration analyses
+
+The following commands evaluate fixed checkpoints or source signals. Results are written to `work/study/supplementary/`. They do not select new canonical hyperparameters or modify the patient split.
+
+### INCART signal quality and patient-removal sensitivity
+
+```bash
+python -m ecg_revision.supplementary signal-quality --root work
+python -m ecg_revision.supplementary patient-robustness --root work
+```
+
+Signal checks use native physical and digital waveforms. They report amplitude excursions above 10 mV, ADC-rail samples, observed digital extrema, and constant/extreme plateaus. A long plateau at an observed extremum can occur without reaching a theoretical ADC rail; these measures should be interpreted separately. The checks describe signal characteristics and do not introduce preprocessing exclusions.
+
+Patient-removal sensitivity uses fixed canonical D2 predictions at threshold 0.5. It evaluates the full INCART test set, each of its seven leave-one-patient-out subsets, and joint removal of patients `INC_1` (I01/I02) and `INC_25` (I57/I58). These are post-hoc held-out evaluation subsets, without retraining. Single-class subsets return undefined ranking metrics and MCC.
+
+### Patient-level privacy uncertainty
+
+```bash
+python -m ecg_revision.supplementary privacy-uncertainty --root work
+```
+
+This extends the privacy audit with patient-level inference. Each patient's complete ten-seed score vector stays together. The statistic is the mean ROC-AUC over matched seeds. Exact label permutation enumerates 657,800 assignments for train/test (19 versus 7 patients) and 1,716 assignments for validation/test (6 versus 7 patients). Stratified patient bootstrap intervals use 20,000 repetitions, retaining all ten scores when resampling a patient. RNG seeds are `1000 + method_index` for train/test and `2000 + method_index` for validation/test, in order FedAvg, FedAvgM, FedProx, FedAdam.
+
+Seed SD and patient bootstrap intervals describe different uncertainty sources. The small patient cohort and distribution-shift control limit membership-specific interpretation. Exact permutation and bootstrap calculations can take substantial CPU time.
+
+### All pairwise comparisons and calibration audit
+
+```bash
+python -m ecg_revision.supplementary all-pairs --root work
+python -m ecg_revision.supplementary threshold-audit --root work
+```
+
+The pairwise command uses `canonical_metrics.csv` and reports all six optimizer contrasts per domain with paired 95% t intervals over the ten seeds. These intervals are not multiplicity-adjusted.
+
+The calibration audit reports the mean, SD, minimum and maximum of validation-selected thresholds, fixed/tuned test MCC, and binary Brier score (mean squared probability error). It sweeps distinct validation probabilities using the rule `p >= threshold`; ties within `1e-12` choose the candidate closest to 0.5, with the higher candidate retained on an equal-distance tie. This candidate-only audit is separate from the existing `thresholds` command, whose sweep additionally includes 0.5 and uses a lower-threshold secondary tie-break. Existing D1 thresholds remain unchanged.
+
+### FedProx validation–test comparison
+
+```bash
+python -m ecg_revision.cli train --config configs/fedprox_gap.json --root work
+python -m ecg_revision.supplementary fedprox-gap --root work
+```
+
+The configuration specifies μ=0 and μ=3 for tuning seeds 101, 202 and 303 under the same 20-round, one-local-epoch protocol. Configurations identical to completed tuning runs reuse those checkpoints. The evaluation reports validation-selected checkpoint scores alongside held-out PTB, INCART and macro-domain ROC-AUC. Test results are descriptive and do not change hyperparameter selection.
+
+### Label concentration and fixed ECG excerpt
+
+```bash
+python -m ecg_revision.supplementary label-distribution --root work
+python -m ecg_revision.supplementary excerpt --root work
+```
+
+The label-distribution command counts INCART test positives by patient at τ=0.50 using fixed window eligibility. The reference output contains 125 positives among 11,232 windows; the two largest contributing patients account for 88.8% of those positives.
+
+The excerpt command fixes INCART I03 to samples 18,758–20,757 at 200 Hz (93.79–103.79 s). It exports all 977 stride-one window labels and an excerpt manifest. Reference counts are 561 abnormal and 416 normal windows, with no ineligible windows. This labeling example is distinct from D1 held-out model evaluation; it does not resolve the D1 sampling limitation. Native-lead plateau diagnostics are available through `signal-quality` when selecting a lead for visualization.
+
+### Baseline checkpoint provenance and matched-work timing
+
+```bash
+# Requires completed pooled and local_transfer experiments.
+python -m ecg_revision.supplementary baseline-provenance --root work
+python -m ecg_revision.supplementary matched-timing --root work
+```
+
+The baseline audit hashes all 19 selected checkpoints and verifies that each transfer model starts from a PTB-only checkpoint with the matching seed and data manifest.
+
+The matched timing control performs three repetitions of five rounds, with seeds 900–902, batch size 64, and one local epoch. Each execution mode receives an unmeasured warm-up. It compares sequential four-client FedAvg against pooled work on one device, with 65,056 sampled examples per round in each mode. Local optimizer state resets per federated client/round and persists for the pooled control. Validation, testing and checkpoint writes are excluded from the measured training loop. Warm-up initializes runtime kernels but does not update the measured initial model. This is a work-controlled timing diagnostic, not a time-to-equal-quality comparison or a multi-region deployment.
+
+Supplementary reference tables are available in [reference/supplementary](reference/supplementary/README.md). They retain the precision displayed in the supplied outputs. Complete prediction arrays and some full per-seed audit tables are unavailable; the commands above generate them during reproduction.
+
 ## Principal reference results
 
 Reference results are summarized over 10 matched seeds as mean ± sample standard deviation. Threshold-dependent metrics use the fixed threshold of 0.5.

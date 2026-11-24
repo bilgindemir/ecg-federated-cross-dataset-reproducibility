@@ -35,3 +35,11 @@ Use full-precision reference CSVs when comparing results. The pooled INCART ROC-
 ## Citation and license
 
 Final publication details, a persistent release identifier, and a code license have not yet been specified. Dataset licenses and citation requirements remain those of the respective providers.
+
+## Supplementary output precision and threshold conventions
+
+The additional reference CSVs retain displayed precision. Complete patient-score matrices, full lead-level signal audits, and all per-seed calibration rows are not bundled. Regenerate them with the supplementary commands before performing further inference. Exact patient-label permutation and patient bootstrap intervals apply to the privacy analysis; they do not imply independent overlapping ECG windows.
+
+The calibration audit uses a distinct-probability candidate sweep and higher-threshold equal-distance tie-break. The original threshold analysis additionally evaluates 0.5 and breaks an equal-distance tie toward the lower threshold. Both commands are documented explicitly; the audit does not overwrite existing D1 threshold choices.
+
+Matched-work single-device timing results and their executable control are included. The separate multi-region Flower deployment remains unavailable.

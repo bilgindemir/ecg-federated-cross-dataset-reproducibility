@@ -1,0 +1,9 @@
+{
+  "rounds": 5,
+  "local_epochs": 1,
+  "batch_size": 64,
+  "weighting": "equal",
+  "method": "fedavg",
+  "seed": 900,
+  "repeats": 3
+}

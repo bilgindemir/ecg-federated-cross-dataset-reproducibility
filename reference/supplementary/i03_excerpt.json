@@ -1,0 +1,14 @@
+{
+  "record": "I03",
+  "fs": 200,
+  "start_sample": 18758,
+  "start_seconds": 93.79,
+  "end_seconds": 103.79,
+  "window_samples": 1024,
+  "stride": 1,
+  "tau": 0.05,
+  "candidates": 977,
+  "eligible": 977,
+  "abnormal": 561,
+  "normal": 416
+}

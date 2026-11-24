@@ -14,3 +14,7 @@ This report separates software checks from a scientific rerun.
 
 
 Re-run `python -m pytest -q` and `python scripts/verify_reference.py` locally. After full canonical execution, run `python scripts/compare_results.py work/study/canonical_metrics.csv --output work/comparison.csv` to report metric deltas without an invented tolerance.
+
+## Supplementary implementation checks
+
+Additional tests cover observed-extremum plateaus, patient-removal masks, exact patient-vector permutation against brute-force ROC-AUC enumeration (including tied scores), bootstrap determinism, complete pairwise seed coverage, and the calibration-audit threshold rule. Core training and primary reference outputs remain unchanged. These software checks do not represent a new full-dataset execution of the supplementary analyses.
