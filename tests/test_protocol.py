@@ -12,7 +12,7 @@ from ecg_revision.training import aggregate_states,state_of,run,load_checkpoint
 from ecg_revision.thresholds import best_mcc_threshold
 from ecg_revision.metrics import scores
 from ecg_revision.experiments import jobs
-from ecg_revision.dense import dense_starts,evaluate as dense_evaluate
+from ecg_revision.dense import dense_starts, record_windows
 
 ROOT=Path(__file__).resolve().parents[1]
 torch.set_num_threads(1)
@@ -67,11 +67,53 @@ def test_canonical_plan():
     assert {j.mu for j in js if j.method=='fedprox'}=={3}
     assert {j.epsilon for j in js if j.method=='fedadam'}=={.001}
 
-def test_d1_conflict_guard():
-    starts=dense_starts(360000,'INC_I01',16384)
-    assert len(starts)==16384 and len(np.unique(starts))==16384
-    assert set(np.arange(0,360000-1024+1,512))<=set(starts)
-    with pytest.raises(ValueError,match='conflict'):dense_evaluate([],None,None,None)
+def test_d1_record_sampling():
+    from types import SimpleNamespace
+    starts = dense_starts(360000, 'INC_I01', 16384)
+    assert len(starts) == 16384 and (np.diff(starts) > 0).all()
+    assert set(np.arange(0, 360000 - 1024 + 1, 512)) <= set(starts)
+    assert np.array_equal(starts, dense_starts(360000, 'INC_I01', 16384))
+    assert not np.array_equal(starts, dense_starts(360000, 'INC_I02', 16384))
+    with pytest.raises(ValueError, match='D2'):
+        dense_starts(360000, 'INC_I01', 10)
+    row = SimpleNamespace(domain='INCART', rid='INC_I01')
+    start, y = record_windows(row, 1025, [0, 10, 30], [0, 0, 1])
+    assert start.tolist() == [0] and y.tolist() == [1]
+
+
+def test_reference_dense_cli_and_prediction_archive(tmp_path, monkeypatch):
+    import sys
+    from ecg_revision import cli
+
+    class Fixture:
+        data_id = '9d68265b9e8940c9c1b1'
+
+        def select_records(self, split):
+            assert split == 'test'
+            return pd.DataFrame(dict(rid=['A', 'B'], domain=['PTB'] * 2,
+                                     patient=['P1', 'P2'], label=[0, 1]))
+
+        def signal(self, row):
+            return np.full((12, 1026), row.label, np.float32), [], []
+
+    fixture = Fixture()
+    monkeypatch.setattr(cli, 'Store', lambda *args, **kwargs: fixture)
+    monkeypatch.setattr(sys, 'argv', ['ecg-fl', 'dense', '--config', str(ROOT / 'configs/canonical.json'),
+                                     '--reference-checkpoints', '--method', 'fedavg', '--seed', '0',
+                                     '--domain', 'PTB', '--root', str(tmp_path)])
+    cli.main()
+    study = tmp_path / 'study'
+    output = study / 'canonical_dense_reference_fedavg_seed0_PTB.csv'
+    row = pd.read_csv(output).iloc[0]
+    assert row.n_windows == 6 and row.sampling == 'exhaustive_stride_one'
+    with np.load(study / row.predictions, allow_pickle=False) as archive:
+        assert archive['offset'].tolist() == [0, 3, 6]
+        assert archive['start'].tolist() == [0, 1, 2, 0, 1, 2]
+        assert archive['record'].tolist() == ['A', 'B']
+        assert np.isclose(row.roc_auc, scores(archive['y'], archive['p'])['roc_auc'])
+    monkeypatch.setattr(fixture, 'signal', lambda *args: pytest.fail('Completed predictions should be reused'))
+    cli.main()
+    assert pd.read_csv(output).iloc[0].predictions == row.predictions
 
 class TinyStore:
     split_policy='patient42'

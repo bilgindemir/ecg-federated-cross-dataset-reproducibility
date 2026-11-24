@@ -18,8 +18,18 @@ def main():
     p.add_argument('--config',default='configs/canonical.json')
     p.add_argument('--root',default='work')
     p.add_argument('--workers',type=int,default=6)
-    p.add_argument('--acknowledge-source-d1',action='store_true')
+    p.add_argument('--reference-checkpoints', action='store_true',
+                   help='Run dense evaluation with the 40 published checkpoints and their D2 validation thresholds')
+    p.add_argument('--method', choices=('fedavg', 'fedavgm', 'fedprox', 'fedadam'),
+                   help='Select a method with dense --reference-checkpoints')
+    p.add_argument('--seed', type=int, choices=range(10), help='Select a seed with dense --reference-checkpoints')
+    p.add_argument('--domain', choices=('PTB', 'INCART'), help='Select a domain with dense --reference-checkpoints')
+    p.add_argument('--acknowledge-source-d1', action='store_true', help=argparse.SUPPRESS)
     args=p.parse_args();
+    if args.reference_checkpoints and args.action != 'dense':
+        p.error('--reference-checkpoints applies to dense evaluation')
+    if any(x is not None for x in (args.method, args.seed, args.domain)) and not args.reference_checkpoints:
+        p.error('--method, --seed and --domain select from the published canonical checkpoints')
     import torch
     torch.set_num_threads(1)
     os.environ.setdefault('CUBLAS_WORKSPACE_CONFIG',':4096:8')
@@ -29,6 +39,12 @@ def main():
     if args.action=='plan':
         plan=[x.as_dict() for x in jobs(spec)];print(json.dumps(plan,indent=2));print(f'{len(plan)} runs');return
     store=Store(root/'data',workers=args.workers)
+    if args.reference_checkpoints:
+        from .dense import evaluate_reference
+        if spec != read_json(Path(__file__).resolve().parents[1] / 'configs' / 'canonical.json'):
+            p.error('--reference-checkpoints uses configs/canonical.json')
+        print(evaluate_reference(store, out, method=args.method, seed=args.seed, domain=args.domain))
+        return
     if args.action=='prepare':
         audit=store.prepare();print(json.dumps(audit,indent=2));return
     table=out/(name+'_runs.csv')
@@ -60,7 +76,7 @@ def main():
     elif args.action=='dense':
         from .dense import evaluate
         thresholds=pd.read_csv(out/(name+'_thresholds.csv'))
-        evaluate(paths,store,thresholds,out/(name+'_dense_source_protocol.csv'),args.acknowledge_source_d1)
+        evaluate(paths,store,thresholds,out/(name+'_dense_source_protocol.csv'))
     elif args.action=='privacy':
         from .privacy import evaluate
         evaluate(paths,store,out).to_csv(out/(name+'_privacy.csv'),index=False)

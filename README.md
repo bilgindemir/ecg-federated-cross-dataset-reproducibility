@@ -8,7 +8,7 @@ The primary protocol comprises four logical clients, 20 communication rounds, an
 
 ## Reproducibility status
 
-The repository includes automated implementation tests and verification of the reference results. A complete independent GPU rerun has not yet been completed. The dense-evaluation sampling discrepancy and unavailable multi-region deployment artifacts are described in the relevant sections below and in [reproducibility limitations](docs/OPEN_ISSUES.md).
+The 40 validation-selected canonical checkpoints are available for evaluation, with a SHA-256 digest for each model. The dense sensitivity analysis includes the exact INCART window starts and FedAvg seed-0 predictions. The [reproducibility limitations](docs/OPEN_ISSUES.md) describe the outstanding full GPU rerun and gaps in the historical multi-region deployment records.
 
 The [manuscript table index](docs/TABLES.md) links each table to its configuration, command, or reference data. The [frozen canonical source snapshot](reference/source/canonical/ecg_revision) matches the source fingerprint recorded for all 40 primary runs.
 
@@ -28,7 +28,9 @@ ecg_revision/
   cli.py              Portable commands
 configs/              Canonical and supplementary experiment specifications
 manifests/            Fixed 75-record INCART patient/split assignment
-reference/            Reference tables, protocols, configurations and histories
+reference/runs/       Canonical configurations, training histories and selected checkpoints
+reference/dense/      INCART window manifest and FedAvg seed-0 window predictions
+reference/study/      Published seed-level metrics, thresholds and summaries
 provenance/           Implementation-test and reference-verification reports
 scripts/              Reference verification and timing-summary commands
 tests/                Automated implementation and protocol tests
@@ -101,6 +103,7 @@ export CUBLAS_WORKSPACE_CONFIG=:4096:8
 python -m ecg_revision.cli environment --root work
 python -m pytest -q
 python scripts/verify_reference.py
+python scripts/verify_dense.py
 ```
 
 Run these commands from the repository root; the supported installation is editable so the checked-in split manifest remains available. On Windows, activate `.venv\Scripts\activate` and set the environment variable using your shell's syntax.
@@ -210,16 +213,39 @@ python -m ecg_revision.cli labels --config configs/canonical.json --root work
 
 Decision thresholds maximize validation MCC separately for each model/domain. Ties choose the value closest to 0.5, then the lower threshold. Test predictions are evaluated only after selection. Label sensitivity retains fixed models/predictions and changes INCART test labels for τ={0.01,0.05,0.10,0.20,0.30,0.50}; it does not retrain under alternate targets.
 
-### Dense D1 sensitivity: unresolved sampling discrepancy
+### Window-stride sensitivity (D1 and D2)
+
+D2 is the standard 1,024-sample window with a stride of 512 samples. It is used for training, validation and the primary test results. D1 checks how test performance changes when the same checkpoints are scored on more densely spaced windows. It uses the same held-out patients, labels and D2 validation-selected thresholds.
+
+| Held-out dataset | D2 test windows | D1 evaluation | D1 test windows |
+|---|---:|---|---:|
+| PTB-XL | 4,316 | All 977 complete stride-one positions per 10-second recording, across 2,158 recordings | 2,108,366 |
+| INCART | 11,232 | 16,384 positions per recording, across 16 recordings from seven patients | 262,144 |
+
+Each INCART recording has 358,977 complete stride-one candidate positions. The sampler retains all 702 D2 starts and draws the other 15,682 without replacement from the remaining positions using a recording-specific seed. It sorts the starts before window extraction and applies the minimum-three-beat rule. All selected windows were eligible, including 123,948 positive windows at τ = 0.05. The same positions apply to every method and training seed. [Sampling specification and verification evidence](docs/TABLES.md#d1-sampling-provenance)
+
+From the repository root, verify the reference starts, thresholds and FedAvg seed-0 INCART scores offline, or rebuild the beat counts from the public annotations. The second command downloads only the missing INCART headers and annotation files.
 
 ```bash
-# Run the validation-threshold analysis before dense evaluation.
-python -m ecg_revision.cli dense --config configs/canonical.json --root work --acknowledge-source-d1
+python scripts/verify_dense.py
+python scripts/verify_dense.py --annotations-dir work/data/raw/incart
 ```
 
-PTB-XL is evaluated exhaustively at stride one, yielding 2,108,366 windows. INCART evaluation includes all 16 test recordings, with 16,384 candidate start positions per recording. D2 validation-selected decision thresholds are reused unchanged.
+To run model inference with the published checkpoints and their original thresholds, use either the single-checkpoint example or the full four-method, ten-seed command. These commands acquire the required data and only load held-out waveforms.
 
-**Sampling limitation:** the current implementation includes all stride-512 starts and samples additional positions using a record-ID-derived seed. The manuscript describes seed-42 sampling from all candidate positions. This difference remains unresolved. The command therefore requires explicit acknowledgement and writes `*_dense_source_protocol.csv`. These outputs should be interpreted according to the implemented sampling rule; they do not establish replication of the manuscript's stated sampling procedure.
+```bash
+python -m ecg_revision.cli dense --reference-checkpoints --method fedavg --seed 0 --domain INCART --root work
+python -m ecg_revision.cli dense --reference-checkpoints --root work
+```
+
+The complete command writes `work/study/canonical_dense_reference.csv` and `work/study/canonical_dense_reference_summary.csv` (mean and sample SD across the ten seeds). A filtered command adds its method, seed or domain to the filename. The `predictions` column points to a local archive containing the ordered recording IDs, offsets, exact starts, labels and probabilities. Completed checkpoint/domain predictions are reused when their provenance matches. Compare metrics by `method`, `seed` and `domain` with the [reference rows](reference/study/d1_canonical_10seed_restart_safe_rows.csv) or the [ten-seed summary for Supplementary Table S1](reference/study/d1_canonical_10seed_summary.csv).
+
+For locally trained checkpoints, use their own validation thresholds. The dense command writes `work/study/canonical_dense_source_protocol.csv`.
+
+```bash
+python -m ecg_revision.cli thresholds --config configs/canonical.json --root work
+python -m ecg_revision.cli dense --config configs/canonical.json --root work
+```
 
 ### Patient-level membership-inference audit
 
@@ -293,7 +319,7 @@ python -m ecg_revision.supplementary excerpt --root work
 
 The label-distribution command counts INCART test positives by patient at τ=0.50 using fixed window eligibility. The reference output contains 125 positives among 11,232 windows; the two largest contributing patients account for 88.8% of those positives.
 
-The excerpt command fixes INCART I03 to samples 18,758–20,757 at 200 Hz (93.79–103.79 s). It exports all 977 stride-one window labels and an excerpt manifest. Reference counts are 561 abnormal and 416 normal windows, with no ineligible windows. This labeling example is distinct from D1 held-out model evaluation; it does not resolve the D1 sampling limitation. Native-lead plateau diagnostics are available through `signal-quality` when selecting a lead for visualization.
+The excerpt command fixes INCART I03 to samples 18,758–20,757 at 200 Hz (93.79–103.79 s). It exports all 977 stride-one window labels and an excerpt manifest. Reference counts are 561 abnormal and 416 normal windows, with no ineligible windows. This training-record illustration enumerates every stride-one start within the excerpt. The held-out D1 analysis uses the 16 test recordings listed in the sampling manifest. Native-lead plateau diagnostics are available through `signal-quality` when selecting a lead for visualization.
 
 ### Baseline checkpoint provenance and matched-work timing
 
@@ -332,13 +358,13 @@ Pooled values and supplementary tables are in `reference/study/baseline_canonica
 
 Recorded canonical execution used a Tesla T4, two CPU cores and one PyTorch thread. Required host RAM, disk peak, GPU memory peak and full-study runtime were not recorded. The supplied hardware observations are not minimum requirements.
 
-D2 alone contains 95,419 float32 windows × 12 × 1,024, or **4,690,034,688 bytes (~4.37 GiB)** of waveform payload (calculated, excluding NPY headers, metadata, raw files, full-record processed arrays, temporary files and checkpoints). Processing both sources also retains full-record arrays; allow additional disk space. D1 is streamed in batches of 256 rather than materializing all windows. Canonical training consists of 800 rounds / 3,200 client local epochs. Expanded sweeps, baselines, D1, and privacy add substantial work. CPU execution is supported but no wall-time prediction is established.
+D2 alone contains 95,419 float32 windows × 12 × 1,024, or **4,690,034,688 bytes (~4.37 GiB)** of waveform payload (calculated, excluding NPY headers, metadata, raw files, full-record processed arrays, temporary files and checkpoints). Processing both sources also retains full-record arrays; allow additional disk space. D1 streams waveform windows in batches of 256. Keeping all 80 new prediction archives requires about 1.15 GiB for starts (int64), labels (int8) and probabilities (float32), plus a small amount for record IDs and metadata. Canonical training consists of 800 rounds / 3,200 client local epochs. Expanded sweeps, baselines, D1, and privacy add substantial work. CPU execution is supported but no wall-time prediction is established.
 
 Manuscript historical timing: centralized five epochs 191.23 s, sequential FL 20 rounds 639.67 s, calculated parallel lower bound 182.88 s. Multi-region timing reports CPU clients with 2 vCPU/8 GB and a 2 vCPU/4 GB server, three 20-round runs averaging 2011.64 ± 38.27 s. These measurements use distinct execution protocols and hardware; they are not runtime targets for this package and should not be used to calculate cross-hardware speedups.
 
 ## Citation and licensing
 
-When using this repository, cite the software version used, the accompanying manuscript, and the dataset publications linked above. See [CITATION.cff](CITATION.cff) for the software citation metadata.
+When using this repository, cite the software version used, the accompanying manuscript, and the dataset publications linked above. The [v1.0.0 Zenodo record](https://doi.org/10.5281/zenodo.24514278) archives the original release. For the additional checkpoint and dense-evaluation files on this branch, identify the Git commit you used. See [CITATION.cff](CITATION.cff) for the software citation metadata.
 
 A code license has not yet been specified. Dataset use remains subject to the respective PhysioNet license and citation requirements.
 
@@ -346,4 +372,4 @@ A code license has not yet been specified. Dataset use remains subject to the re
 
 Implementation checks cover split integrity, window labeling, model structure, aggregation, threshold selection, and deterministic round-boundary resume. Reference verification checks all 40 canonical runs, 800 round histories, and 80 held-out domain evaluations. See [validation details](docs/VALIDATION.md).
 
-The current validation does not constitute a complete independent rerun of all experiments. Consult [reproducibility limitations](docs/OPEN_ISSUES.md) before interpreting dense-evaluation or systems-timing comparisons.
+The [verification record](docs/VALIDATION.md) identifies which dense results can be checked at window level. The scope of independent reruns and the availability of historical systems-timing inputs are recorded in [reproducibility limitations](docs/OPEN_ISSUES.md).

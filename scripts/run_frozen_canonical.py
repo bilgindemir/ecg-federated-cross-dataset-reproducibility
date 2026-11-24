@@ -14,13 +14,17 @@ def main():
     parser.add_argument("action", choices=("plan", "train", "evaluate"))
     parser.add_argument("--root", default="work/frozen_canonical", type=Path)
     parser.add_argument("--seed", type=int, choices=range(10))
+    parser.add_argument("--reference-checkpoints", action="store_true",
+                        help="Score the published validation-selected checkpoints on D2")
     args = parser.parse_args()
+    if args.reference_checkpoints and args.action != "evaluate":
+        parser.error("--reference-checkpoints applies to evaluate")
 
     reference = Path(__file__).resolve().parents[1] / "reference"
     sys.path.insert(0, str(reference / "source" / "canonical"))
     os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
     import torch
-    from ecg_revision.common import Config, code_hash
+    from ecg_revision.common import Config, code_hash, file_hash
     from ecg_revision.data import Store
     from ecg_revision.evaluation import evaluate_d2
     from ecg_revision.training import run, run_id
@@ -37,6 +41,10 @@ def main():
         if store.data_id != protocol["data_id"]:
             raise SystemExit("Record manifest fingerprint does not match the canonical protocol.")
 
+    hashes = {}
+    if args.reference_checkpoints:
+        with (reference / "canonical_checkpoints.csv").open(newline="") as stream:
+            hashes = {r["run_id"]: r["checkpoint_sha256"] for r in csv.DictReader(stream)}
     with (reference / "study" / "primary_canonical_runs.csv").open(newline="") as stream:
         for row in csv.DictReader(stream):
             if args.seed is not None and int(row["seed"]) != args.seed:
@@ -51,7 +59,10 @@ def main():
             elif args.action == "train":
                 run(config, store, study)
             else:
-                checkpoint = study / "runs" / recorded_id / "best.pt"
+                source = reference if args.reference_checkpoints else study
+                checkpoint = source / "runs" / recorded_id / "best.pt"
+                if args.reference_checkpoints and file_hash(checkpoint) != hashes[recorded_id]:
+                    raise SystemExit(f"Reference checkpoint SHA-256 mismatch for {recorded_id}.")
                 if not checkpoint.is_file():
                     raise SystemExit(f"Train the canonical run before evaluating {checkpoint}.")
                 evaluate_d2(checkpoint, store, study, taus=(0.05,))

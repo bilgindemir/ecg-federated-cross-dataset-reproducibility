@@ -2,9 +2,7 @@
 
 ## Dense test-time sampling
 
-The manuscript describes an RNG initialized with seed 42 for each INCART recording, sampling without replacement from all valid stride-one start positions. The evaluation program for the saved D1 rows calls a sampler that includes all stride-512 starts and samples additional positions using a recording-ID-derived seed. The maintained implementation in `ecg_revision/dense.py` uses the same rule. The reference rows lack the selected start positions and per-window predictions needed to verify the sampling history of resumed rows.
-
-Dense evaluation therefore requires `--acknowledge-source-d1`. Results should be interpreted according to the implemented D2-inclusive sampling rule. The sampling procedure must be reconciled before claiming exact reproduction of the manuscript's D1 protocol.
+The archived INCART starts and predictions support a direct window-level check for FedAvg seed 0. The other 39 INCART runs have historical aggregate rows with matching class counts and thresholds. Their published checkpoints support independent evaluation on the same deterministic positions. See the [sampling evidence](TABLES.md#d1-sampling-provenance).
 
 ## Multi-region systems timing
 
@@ -26,7 +24,7 @@ Training loads only training and validation partitions. Test evaluation is perfo
 
 Canonical run configurations record the scientific-package versions listed in the README. A complete transitive dependency lockfile, equivalent Colab image, GPU driver version, peak RAM, and peak GPU memory are unavailable. A complete independent public-dataset GPU rerun has not yet been completed. Implementation tests and reference-table checks are distinct from end-to-end experimental replication.
 
-Reference checkpoint payloads are not distributed with this release. Researchers can generate checkpoints using the documented training commands.
+The 40 canonical validation-selected checkpoints are indexed by [run ID and SHA-256](../reference/canonical_checkpoints.csv). The training commands also support independent fitting from the public datasets.
 
 ## Numerical reporting
 
@@ -34,7 +32,7 @@ Use full-precision reference CSVs when comparing results. The pooled INCART ROC-
 
 ## Citation and license
 
-Final publication details, a persistent release identifier, and a code license have not yet been specified. Dataset licenses and citation requirements remain those of the respective providers.
+Version v1.0.0 is archived at [Zenodo](https://doi.org/10.5281/zenodo.24514278). The additional dense-evaluation artifacts are identified by the Git commit containing them. The repository does not specify a separate code license. Dataset licenses and citation requirements remain those of the respective providers.
 
 ## Supplementary output precision and threshold conventions
 
